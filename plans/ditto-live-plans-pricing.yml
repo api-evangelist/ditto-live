@@ -1,0 +1,206 @@
+---
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Ditto
+providerId: ditto-live
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+tags:
+  - Peer-to-Peer
+  - Edge Computing
+  - Mobile Database
+  - Sync
+description: >-
+  Ditto offers three cloud-sync pricing tiers — Free, Pro, and Enterprise —
+  differentiated by device connections, storage, data transfer, SLA, and
+  support level.
+sources:
+  - https://www.ditto.com/pricing/cloud-sync
+plans:
+  - id: ditto-live-free
+    name: Free
+    type: free
+    description: >-
+      Entry-level plan with 10 cloud device connections and 2 GB storage;
+      suitable for development and prototyping.
+    entries:
+      - label: Cloud Device Connections
+        name: cloud_device_connections
+        type: quota
+        metric: connections
+        limit: 10
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Storage
+        name: storage_gb
+        type: quota
+        metric: GB
+        limit: 2
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Uptime SLA
+        name: uptime_sla
+        type: boolean
+        metric: percent
+        limit: 99
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+  - id: ditto-live-pro
+    name: Pro
+    type: paid
+    description: >-
+      Production-ready plan with 1,000+ cloud device connections, 50 GB
+      storage, 250 GB data transfer, MongoDB Connector, Remote Device
+      Monitoring (up to 10,000 devices), and 99.9% SLA with business-hours
+      support.
+    entries:
+      - label: Cloud Device Connections (base)
+        name: cloud_device_connections
+        type: quota
+        metric: connections
+        limit: 1000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'contact sales'
+        userMultiplied: false
+      - label: Cloud Device Connections (max)
+        name: cloud_device_connections_max
+        type: quota
+        metric: connections
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'per 1,000 overage'
+        userMultiplied: false
+      - label: Storage (included)
+        name: storage_gb
+        type: quota
+        metric: GB
+        limit: 50
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+      - label: Storage (max)
+        name: storage_gb_max
+        type: quota
+        metric: GB
+        limit: 250
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'per 50 GB overage'
+        userMultiplied: false
+      - label: Data Transfer (included)
+        name: data_transfer_gb
+        type: quota
+        metric: GB
+        limit: 250
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+      - label: Uptime SLA
+        name: uptime_sla
+        type: boolean
+        metric: percent
+        limit: 999
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+      - label: MongoDB Connector
+        name: mongodb_connector
+        type: boolean
+        metric: feature
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+      - label: Remote Device Monitoring
+        name: remote_device_monitoring
+        type: quota
+        metric: devices
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+  - id: ditto-live-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Custom plan with unlimited device connections, custom storage and
+      transfer, 99.99% SLA, 24/7 support, private endpoints, unlimited Remote
+      Device Monitoring, BYOC/self-managed deployment, and professional
+      services.
+    entries:
+      - label: Cloud Device Connections
+        name: cloud_device_connections
+        type: quota
+        metric: connections
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'custom'
+        userMultiplied: false
+      - label: Storage
+        name: storage_gb
+        type: quota
+        metric: GB
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'custom'
+        userMultiplied: false
+      - label: Data Transfer
+        name: data_transfer_gb
+        type: quota
+        metric: GB
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'custom'
+        userMultiplied: false
+      - label: Uptime SLA
+        name: uptime_sla
+        type: boolean
+        metric: percent
+        limit: 9999
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+      - label: Remote Device Monitoring (unlimited)
+        name: remote_device_monitoring
+        type: quota
+        metric: devices
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false

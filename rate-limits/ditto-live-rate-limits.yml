@@ -1,0 +1,39 @@
+---
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Ditto
+providerId: ditto-live
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Edge Server
+  - HTTP API
+description: >-
+  Ditto does not publish fixed cloud HTTP API rate limits; however, the Edge
+  Server HTTP API supports configurable per-IP, per-API-key, and per-route
+  throttling via max_requests and window_secs settings.
+sources:
+  - https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: Edge Server - Per IP
+    scope: ip
+    metric: requests_per_window
+    limit: configurable
+    timeFrame: configurable
+  - name: Edge Server - Per API Key
+    scope: key
+    metric: requests_per_window
+    limit: configurable
+    timeFrame: configurable
+  - name: Edge Server - Per Route
+    scope: route
+    metric: requests_per_window
+    limit: configurable
+    timeFrame: configurable

@@ -1,0 +1,108 @@
+---
+aid: ditto-live
+name: Ditto
+description: >-
+  Ditto is a peer-to-peer data sync platform for mobile and edge devices that
+  enables real-time synchronization without requiring a central server, using
+  Bluetooth, WiFi Direct, and LAN transports. The platform ships an embeddable
+  SDK for iOS, Android, Flutter, React Native, JavaScript, .NET/C#, C++, Rust,
+  Go, Java, and Kotlin, and backs it with an optional cloud tier (the "Big
+  Peer") that bridges device meshes to the internet. Developers query and
+  mutate data through DQL (Ditto Query Language) on-device, or via a cloud
+  HTTP API (v5) against per-app endpoints. Ditto targets mission-critical
+  mobile and edge workloads — retail, manufacturing, aviation, healthcare —
+  where connectivity is intermittent or absent.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Developer Tools
+  - Database
+  - Synchronization
+  - Peer-to-Peer
+  - Edge Computing
+  - Offline-First
+  - Mobile
+url: https://raw.githubusercontent.com/api-evangelist/ditto-live/refs/heads/main/apis.yml
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
+apis:
+  - aid: ditto-live:sdk
+    name: Ditto SDK
+    description: >-
+      Multi-platform embeddable SDK for peer-to-peer and cloud-synced data
+      storage. Supports Swift, Kotlin, Flutter, React Native, JavaScript,
+      .NET/C#, C++, Rust, Go, and Java. Developers use DQL to create, read,
+      update, delete, and observe documents that sync automatically over
+      Bluetooth, WiFi Direct, LAN, and cloud transports.
+    humanURL: https://docs.ditto.live/sdk/latest/home
+    tags:
+      - SDK
+      - Peer-to-Peer
+      - Offline-First
+      - Database
+    properties:
+      - type: Documentation
+        url: https://docs.ditto.live/sdk/latest/home
+  - aid: ditto-live:cloud-http-api
+    name: Ditto Cloud HTTP API
+    description: >-
+      REST-style HTTP API (v4/v5) for querying and mutating data in the Ditto
+      Big Peer cloud platform. Authenticated with a static API key via Bearer
+      token. The primary endpoint accepts DQL statements via POST to
+      /api/v5/store/execute under a per-app cloud URL. A Swagger spec is
+      published alongside each deployment.
+    humanURL: https://docs.ditto.live/cloud/http-api/getting-started
+    baseURL: https://{app-id}.cloud.dittolive.app
+    tags:
+      - REST
+      - Cloud
+      - Database
+      - DQL
+    properties:
+      - type: Documentation
+        url: https://docs.ditto.live/cloud/http-api/getting-started
+  - aid: ditto-live:edge-server-http-api
+    name: Ditto Edge Server HTTP API
+    description: >-
+      Local HTTP API exposed by the Ditto Edge Server process running on-device
+      or on an edge node. Provides endpoints for executing DQL queries, health
+      checks, peer-presence status, and log retrieval. Supports configurable
+      per-IP, per-API-key, and per-route rate limiting.
+    humanURL: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+    tags:
+      - Edge
+      - HTTP API
+      - DQL
+      - Local
+    properties:
+      - type: Documentation
+        url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+common:
+  - type: Website
+    url: https://www.ditto.com
+  - type: Documentation
+    url: https://docs.ditto.live
+  - type: GitHubOrganization
+    url: https://github.com/getditto
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/dittolive
+  - type: X
+    url: https://twitter.com/dittolive
+  - type: Blog
+    url: https://www.ditto.com/blog
+  - type: Pricing
+    url: https://www.ditto.com/pricing/cloud-sync
+  - type: Changelog
+    url: https://docs.ditto.live/changelog
+  - type: Portal
+    url: https://portal.ditto.live
+  - type: Plans
+    url: plans/ditto-live-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/ditto-live-rate-limits.yml
+  - type: FinOps
+    url: finops/ditto-live-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
