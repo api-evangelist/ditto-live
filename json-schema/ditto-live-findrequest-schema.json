@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "description": "Request parameters for querying documents in a collection. Supports filtering, pagination, and sorting to help you retrieve exactly the data you need.",
+  "required": [
+    "collection",
+    "query"
+  ],
+  "properties": {
+    "args": {
+      "$ref": "#/components/schemas/AnyValue",
+      "description": "Named parameters to use in the query, providing safe value substitution and better query performance"
+    },
+    "collection": {
+      "type": "string",
+      "description": "The name of the collection to query"
+    },
+    "describe": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, includes additional metadata about the query execution"
+    },
+    "formatAttachment": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, formats any attachment fields for easier consumption"
+    },
+    "limit": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Maximum number of documents to return. Use with offset for pagination.",
+      "default": 1000
+    },
+    "offset": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of documents to skip before starting to return results. Use with limit for pagination."
+    },
+    "query": {
+      "type": "string",
+      "description": "The query expression that filters which documents to return. Use parameterized values with :param syntax for better security and performance."
+    },
+    "serializedAs": {
+      "$ref": "#/components/schemas/SerializedAs",
+      "description": "Controls how the document data is serialized in the response"
+    },
+    "sort": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Sort"
+      },
+      "description": "Specifies the order in which to return matching documents"
+    }
+  },
+  "example": {
+    "collection": "people",
+    "query": "favoriteBook.title == 'The Great Gatsby'"
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FindRequest"
+}

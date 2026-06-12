@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "connections": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "A set of connection addresses of other Big Peer instances.\n\nEach connection address should point to the Big Peer replication server dedicated to the\nsame app ID.\n\nThe set is allowed to be empty. In this case, it's the remote Big Peer's responsibility to\ninitiate the connection.",
+      "example": [
+        "big-peer-2.ditto.svc.cluster.local:4040"
+      ],
+      "uniqueItems": true
+    },
+    "name": {
+      "type": "string",
+      "title": "Dns1123Label",
+      "description": "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123",
+      "maxLength": 63,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+    },
+    "queriesByCollection": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Mapping from collection name to a list of DQL subscriptions queries.\nThis contains the data that the Big Peer instance will subscribe to, for the given app, in\nthe context of Big Peer replication.\nIf empty, this Big Peer instance will not subscribe to any data so no data will be\nreplicated to it.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "propertyNames": {
+        "type": "string"
+      },
+      "example": {
+        "cars": [
+          "true"
+        ]
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BigPeerReplication"
+}

@@ -1,0 +1,15 @@
+{
+  "collection": "people",
+  "query": "age > :minAge",
+  "args": {
+    "minAge": 18
+  },
+  "limit": 50,
+  "offset": 0,
+  "sort": [
+    {
+      "property": "name",
+      "direction": "ascending"
+    }
+  ]
+}

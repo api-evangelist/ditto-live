@@ -1,0 +1,66 @@
+{
+  "type": "object",
+  "required": [
+    "name",
+    "expiresAt",
+    "permissions"
+  ],
+  "properties": {
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "example": "API key used for staging environment."
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2100-04-13T12:00:00Z"
+    },
+    "name": {
+      "type": "string",
+      "title": "Dns1123Label",
+      "description": "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123",
+      "maxLength": 63,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+    },
+    "permissions": {
+      "type": "object",
+      "title": "Permission",
+      "description": "Set of permissions granted to a particular API key or device token.",
+      "required": [
+        "read",
+        "write"
+      ],
+      "properties": {
+        "qlVersion": {
+          "type": "integer",
+          "format": "u-int8",
+          "description": "What query language version are the queries written in? If 1, use DQL. If 0, use legacy query builder. Other numbers are not valid. Defaults to 0.",
+          "default": 0,
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "read": {
+          "$ref": "#/components/schemas/PermissionRules",
+          "description": "The set of read permissions granted"
+        },
+        "remoteQuery": {
+          "type": "boolean",
+          "description": "Can this initiate remote queries? In addition to this, remote queries also require full read permission.",
+          "default": false
+        },
+        "write": {
+          "$ref": "#/components/schemas/PermissionRules",
+          "description": "The set of write permissions granted"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApiKey"
+}

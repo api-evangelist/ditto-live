@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "description": "Request to execute one or more write commands in a transaction",
+  "required": [
+    "commands"
+  ],
+  "properties": {
+    "commands": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WriteCommand"
+      },
+      "description": "Array of write commands to execute in the transaction"
+    }
+  },
+  "example": {
+    "commands": [
+      {
+        "method": "upsert",
+        "collection": "people",
+        "id": 1,
+        "value": {
+          "name": "Susan",
+          "age": 31,
+          "favoriteBook": {
+            "published": 1925,
+            "title": "The Great Gatsby"
+          }
+        }
+      }
+    ]
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WriteRequest"
+}

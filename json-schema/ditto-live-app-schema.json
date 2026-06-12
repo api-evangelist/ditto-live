@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "appId": {
+      "type": "string",
+      "title": "AppId",
+      "format": "uuid",
+      "description": "UUID used to identify a BigPeerApp resource"
+    },
+    "authProviders": {
+      "type": "object",
+      "title": "AuthProviders",
+      "description": "Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/ProviderConfig"
+      }
+    },
+    "name": {
+      "type": "string",
+      "title": "Dns1123Label",
+      "description": "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123",
+      "maxLength": 63,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "App"
+}

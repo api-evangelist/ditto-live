@@ -1,0 +1,88 @@
+vocabulary:
+  name: Ditto Platform Vocabulary
+  description: >-
+    Core terms, concepts, and domain language used across the Ditto peer-to-peer
+    data sync platform, its cloud HTTP API, SDK, and operator management API.
+  version: "1.0.0"
+  terms:
+    - name: DQL
+      description: >-
+        Ditto Query Language — a SQL-like query language used to create, read,
+        update, delete, and observe documents on-device and via the cloud HTTP API.
+    - name: Big Peer
+      description: >-
+        The optional cloud-hosted server component that bridges device meshes to
+        the internet, accessible via the cloud HTTP API.
+    - name: Small Peer
+      description: >-
+        An embedded Ditto instance running on a mobile or edge device, syncing
+        directly with other peers via Bluetooth, WiFi Direct, LAN, or cloud.
+    - name: Document
+      description: >-
+        The fundamental data unit in Ditto — a JSON-like object stored in a
+        collection, identified by a unique _id field.
+    - name: Collection
+      description: >-
+        A named set of documents, analogous to a table in relational databases or
+        a collection in document stores.
+    - name: Upsert
+      description: >-
+        A write operation that inserts a document if it does not exist, or updates
+        it if it does, using the provided id and value fields.
+    - name: Mesh Sync
+      description: >-
+        Automatic, conflict-free data synchronization across a peer mesh using
+        CRDTs (Conflict-free Replicated Data Types) over Bluetooth, WiFi, LAN,
+        and cloud transports.
+    - name: CRDT
+      description: >-
+        Conflict-free Replicated Data Type — the underlying data structure that
+        enables Ditto to merge concurrent edits from multiple peers without conflicts.
+    - name: Transport
+      description: >-
+        A communication channel used by Ditto peers for sync — includes Bluetooth
+        Low Energy, WiFi Direct, Local Area Network (LAN/mDNS), and cloud WebSocket.
+    - name: AppID
+      description: >-
+        A UUID that uniquely identifies a Ditto application within the portal and
+        determines the cloud endpoint subdomain (e.g., {app-id}.cloud.dittolive.app).
+    - name: API Key
+      description: >-
+        A static authentication credential used as a Bearer token in the
+        Authorization header when calling the cloud HTTP API.
+    - name: QueryRequest
+      description: >-
+        The request body for POST /store/execute — contains a DQL statement and
+        optional named args for parameterized queries.
+    - name: QueryResponse
+      description: >-
+        The response from POST /store/execute — includes items (result rows),
+        mutatedDocumentIds, queryType, warnings, and an optional error.
+    - name: WriteCommand
+      description: >-
+        A single atomic write operation within a WriteRequest — supports methods
+        upsert, update, and remove on a named collection.
+    - name: RemoteExecute
+      description: >-
+        A cloud API operation that fans out a DQL statement to specific connected
+        peers and returns per-peer execution results.
+    - name: DataBridge
+      description: >-
+        A cloud operator resource that streams CDC (Change Data Capture) events
+        from Ditto collections to external systems such as Kafka topics or MongoDB.
+    - name: BigPeerReplication
+      description: >-
+        A cloud operator resource that replicates data between two Big Peer
+        application instances using configurable collection-level DQL filters.
+    - name: Edge Server
+      description: >-
+        A standalone Ditto process deployed on an edge node that exposes a local
+        HTTP API for DQL execution, health checks, peer presence, and log retrieval.
+    - name: Namespace
+      description: >-
+        An organizational grouping in the operator API that contains one or more
+        Big Peer instances and their associated applications.
+    - name: Provider
+      description: >-
+        An authentication configuration attached to a Ditto application — supports
+        webhook-based and anonymous schemes for authenticating device peers.

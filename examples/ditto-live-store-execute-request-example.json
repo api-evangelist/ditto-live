@@ -1,0 +1,6 @@
+{
+  "statement": "SELECT * FROM people WHERE favoriteBook.title = :title",
+  "args": {
+    "title": "The Great Gatsby"
+  }
+}

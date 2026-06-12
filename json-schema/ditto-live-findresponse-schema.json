@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "required": [
+    "documents"
+  ],
+  "properties": {
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Document"
+      },
+      "description": "Array of documents matching the query criteria"
+    },
+    "txnId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The transaction ID at which this query was performed"
+    }
+  },
+  "example": {
+    "documents": {
+      "id": 1,
+      "contents": {
+        "name": "Francis",
+        "favoriteBook": {
+          "title": "The Great Gatsby",
+          "published": 1925
+        }
+      }
+    },
+    "txnId": 9000
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FindResponse"
+}

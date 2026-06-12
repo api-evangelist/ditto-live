@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "description": "Response from executing a DQL statement. Contains query results, affected document IDs, and any warnings or errors that occurred.",
+  "required": [
+    "queryType",
+    "items",
+    "mutatedDocumentIds",
+    "warnings",
+    "totalWarningsCount"
+  ],
+  "properties": {
+    "error": {
+      "$ref": "#/components/schemas/QueryResponseError"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AnyValue"
+      }
+    },
+    "mutatedDocumentIds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AnyValue"
+      }
+    },
+    "queryType": {
+      "type": "string",
+      "description": "Indicates the type of query that was executed"
+    },
+    "totalWarningsCount": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Total number of warnings generated during query execution"
+    },
+    "transactionId": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/QueryResponseWarning"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QueryResponse"
+}

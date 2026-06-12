@@ -1,0 +1,9 @@
+{
+  "results": [
+    {
+      "type": "upserted",
+      "docId": "person-001",
+      "collection": "people"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "description": "Request parameters for executing a DQL statement. DQL is Ditto's powerful query language that supports complex queries and data modifications.",
+  "required": [
+    "statement"
+  ],
+  "properties": {
+    "args": {
+      "$ref": "#/components/schemas/AnyValue",
+      "description": "Named parameters to use in the DQL statement, providing safe value substitution and better query performance"
+    },
+    "statement": {
+      "type": "string",
+      "description": "The DQL statement to execute. See https://docs.ditto.live/dql-guide for comprehensive documentation on DQL syntax and features."
+    }
+  },
+  "example": {
+    "statement": "SELECT * FROM people WHERE favoriteBook.title = :title",
+    "args": {
+      "title": "The Great Gatsby"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QueryRequest"
+}

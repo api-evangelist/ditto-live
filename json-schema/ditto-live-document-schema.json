@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "Represents a document in the Ditto store. Documents are schema-free and can contain nested fields of various CRDT types for conflict-free replication.",
+  "required": [
+    "id",
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "$ref": "#/components/schemas/AnyValue",
+      "description": "The document's content, which can include any valid JSON data types and special Ditto CRDT types"
+    },
+    "id": {
+      "$ref": "#/components/schemas/AnyValue",
+      "description": "The unique identifier for this document within its collection"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Document"
+}

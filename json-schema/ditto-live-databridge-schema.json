@@ -1,0 +1,388 @@
+{
+  "type": "object",
+  "required": [
+    "name",
+    "bridge"
+  ],
+  "properties": {
+    "bridge": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Kafka",
+          "properties": {
+            "kafka": {
+              "type": "object",
+              "properties": {
+                "extraAcls": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Kafka ACL rule following the Strimzi KafkaUser ACL schema"
+                  },
+                  "description": "Extra ACLs that you may want to add to the KafkaUser that grants permissions to read from the data bridge Kafka topic. Follows the Strimzi KafkaUser authorization ACL schema."
+                },
+                "source": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "title": "FilteredSource",
+                    "description": "Filtered source defining collection and DQL query",
+                    "required": [
+                      "collection",
+                      "query"
+                    ],
+                    "properties": {
+                      "collection": {
+                        "type": "string",
+                        "description": "Name of the collection against which the query will be run. Example: 'cars'"
+                      },
+                      "query": {
+                        "type": "string",
+                        "description": "DQL query to filter the documents. Example: \"status = 'completed' AND type = 'order'\""
+                      }
+                    }
+                  },
+                  "description": "Array of filtered sources defining the data you'd like to stream. Each source specifies a collection and DQL query to filter documents. When absent or empty, it will stream every change to any document."
+                },
+                "streamType": {
+                  "type": "string",
+                  "description": "Determines which modifications will be applied to incoming data structures. If you don't know what this is, then you don't need to set it. Options: 'heartbeat', 'typed', or 'untyped' (default).",
+                  "default": "untyped",
+                  "enum": [
+                    "heartbeat",
+                    "typed",
+                    "untyped"
+                  ]
+                },
+                "topicPartitions": {
+                  "type": "integer",
+                  "description": "Number of topic partitions (defaults to 10, min: 1, max: 1000)",
+                  "default": 10,
+                  "maximum": 1000,
+                  "minimum": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "title": "MongoConnector",
+          "properties": {
+            "mongoConnector": {
+              "type": "object",
+              "required": [
+                "connectionSecret",
+                "database",
+                "collections"
+              ],
+              "properties": {
+                "collections": {
+                  "type": "object",
+                  "description": "Map of collections to sync, where the key is the collection name",
+                  "additionalProperties": {
+                    "type": "object",
+                    "title": "MongoCollection",
+                    "description": "MongoDB collection configuration for sync",
+                    "required": [
+                      "fields",
+                      "initialSync",
+                      "mode"
+                    ],
+                    "properties": {
+                      "dittoTypes": {
+                        "type": "object",
+                        "description": "CRDT type information for specific field paths",
+                        "properties": {
+                          "settableCounters": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "Set of field path strings that should be considered settable counters. Settable counters are CRDT types that can be incremented/decremented atomically. Example: ['inventory.count', 'stats.views']"
+                          }
+                        }
+                      },
+                      "dqlStrictMode": {
+                        "type": "boolean",
+                        "description": "Enable DQL strict mode for this collection"
+                      },
+                      "fields": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Fields to use for generating Ditto document IDs. For simple cases, use ['_id'] to map MongoDB's _id directly to Ditto's document ID."
+                      },
+                      "initialSync": {
+                        "type": "boolean",
+                        "description": "Whether to perform initial sync of existing documents when the connector starts",
+                        "default": false
+                      },
+                      "mode": {
+                        "type": "string",
+                        "description": "Collection mode determines how BSON types are converted. 'native': efficient CBOR storage with lossy type conversions. 'ejson': full BSON preservation using MongoDB Extended JSON.",
+                        "default": "native",
+                        "enum": [
+                          "native",
+                          "ejson"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "connectionSecret": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "title": "KubernetesSecret",
+                      "description": "Kubernetes Secret containing MongoDB connection string. The Secret must reside in the same namespace as the workload.",
+                      "required": [
+                        "kubernetesSecret"
+                      ],
+                      "properties": {
+                        "kubernetesSecret": {
+                          "type": "object",
+                          "required": [
+                            "name"
+                          ],
+                          "properties": {
+                            "connectionString": {
+                              "type": "string",
+                              "description": "Which data property of the Secret to use as the connection string. Default is 'connectionString'."
+                            },
+                            "name": {
+                              "$ref": "#/components/schemas/Dns1123Label",
+                              "description": "The name of the Secret containing the MongoDB connection string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "title": "AwsSecretsManager",
+                      "description": "AWS Secrets Manager secret containing MongoDB connection string. The MongoDB connector will fetch the connection string from AWS Secrets Manager at startup. The ServiceAccount for the connector will be annotated with the provided IAM role ARN to grant access to the secret.",
+                      "required": [
+                        "awsSecretsManager"
+                      ],
+                      "properties": {
+                        "awsSecretsManager": {
+                          "type": "object",
+                          "required": [
+                            "secretId",
+                            "roleArn",
+                            "region"
+                          ],
+                          "properties": {
+                            "region": {
+                              "type": "string",
+                              "description": "AWS region where the secret is stored. If not specified, defaults to the pod's region from AWS metadata.",
+                              "pattern": "^[a-z][a-z0-9-]+$"
+                            },
+                            "roleArn": {
+                              "type": "string",
+                              "description": "IAM role ARN for accessing the secret. This role will be annotated on the ServiceAccount via 'eks.amazonaws.com/role-arn' annotation. Example: 'arn:aws:iam::123456789012:role/dittocluster/mongo-connector-app-id'",
+                              "pattern": "^arn:[A-Za-z0-9:/+=,.@_-]+$"
+                            },
+                            "secretId": {
+                              "type": "string",
+                              "description": "AWS Secrets Manager secret ID. Example: 'dittocluster/app-id/mongo-connector'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "title": "MongoConnectionSecretReference",
+                  "description": "Reference to a secret containing MongoDB connection string. Supports both Kubernetes Secrets and AWS Secrets Manager."
+                },
+                "database": {
+                  "type": "string",
+                  "description": "MongoDB database name to sync with"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": "DataBridgeKind",
+      "description": "The kind of data bridge: Kafka (recommended) or MongoConnector"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "example": "Stream of completed production orders"
+    },
+    "displayName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "example": "test data bridge"
+    },
+    "name": {
+      "type": "string",
+      "title": "Dns1123Label",
+      "description": "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123",
+      "maxLength": 63,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+    },
+    "status": {
+      "type": "object",
+      "title": "BigPeerDataBridgeStatus",
+      "description": "Status information for a data bridge. Includes conditions following Kubernetes conventions and, for Kafka data bridges, connection information for consuming from the topic.",
+      "required": [
+        "conditions"
+      ],
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "title": "Condition",
+            "description": "Condition contains details for the current condition of this data bridge. Follows the standard Kubernetes condition structure.",
+            "required": [
+              "type",
+              "status",
+              "lastTransitionTime",
+              "reason",
+              "message"
+            ],
+            "properties": {
+              "lastTransitionTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last time the condition of a type changed from one status to another. The required format is 'yyyy-MM-ddTHH:mm:ssZ' in the UTC time zone. Example: '2024-01-15T10:30:00Z'"
+              },
+              "message": {
+                "type": "string",
+                "description": "Human-readable message indicating details about the condition's last transition. May be an empty string. Example: 'Successfully connected to Kafka cluster at kafka.example.com:9092'"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Programmatic identifier indicating the reason for the condition's last transition. A single word in CamelCase. This field may not be empty. Examples: 'KafkaConnected', 'ConfigurationError', 'Provisioned'",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "description": "Status of the condition. Can be 'True', 'False', or 'Unknown'. 'True' means the condition is satisfied, 'False' means it is not, and 'Unknown' means the status cannot be determined.",
+                "enum": [
+                  "True",
+                  "False",
+                  "Unknown"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "description": "Unique identifier of a condition, used to distinguish between other conditions in the resource. Type in CamelCase. Standard types include 'Ready', 'Available', 'Progressing'. Example: 'Ready'",
+                "minLength": 1
+              }
+            }
+          },
+          "description": "List of conditions that indicate the current state of the data bridge. Follows the concept of pod conditions from Kubernetes. Check the 'Ready' condition to determine if the data bridge is operational."
+        },
+        "kafka": {
+          "type": "object",
+          "title": "KafkaConsumerInfo",
+          "description": "All the information that a user needs to consume from the Kafka topic associated with this data bridge. Only present in Kafka data bridges.",
+          "required": [
+            "topic",
+            "consumerGroupPrefix",
+            "endpoint",
+            "certificateSecretRef"
+          ],
+          "properties": {
+            "certificateSecretRef": {
+              "type": "object",
+              "title": "KafkaCertificateSecretReference",
+              "description": "Reference to secrets containing cluster and user P12 certificates and corresponding passwords. Used for mTLS authentication with Kafka.",
+              "required": [
+                "cluster",
+                "user"
+              ],
+              "properties": {
+                "cluster": {
+                  "type": "object",
+                  "title": "P12SecretReference",
+                  "description": "Reference to the Secret that contains the Kafka cluster CA P12 certificate",
+                  "required": [
+                    "name",
+                    "certificate",
+                    "password"
+                  ],
+                  "properties": {
+                    "certificate": {
+                      "type": "string",
+                      "description": "Which data property of the Secret to use as the certificate. Default is 'cert.p12'. Example: 'cert.p12'"
+                    },
+                    "key": {
+                      "type": "string",
+                      "description": "Which data property of the Secret to use as the private key. Default is 'cert.key'. Optional field. Example: 'cert.key'"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the Secret containing the cluster and user certificates and corresponding passwords. Must reside in the same namespace as the workload. Must be a valid DNS-1123 label. Example: 'kafka-cluster-cert'",
+                      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Which data property of the Secret to use as the certificate password. Default is 'cert.password'. Example: 'cert.password'"
+                    }
+                  }
+                },
+                "user": {
+                  "type": "object",
+                  "title": "P12SecretReference",
+                  "description": "Reference to the Secret that contains the user consumable P12 certificate",
+                  "required": [
+                    "name",
+                    "certificate",
+                    "password"
+                  ],
+                  "properties": {
+                    "certificate": {
+                      "type": "string",
+                      "description": "Which data property of the Secret to use as the certificate. Default is 'cert.p12'. Example: 'cert.p12'"
+                    },
+                    "key": {
+                      "type": "string",
+                      "description": "Which data property of the Secret to use as the private key. Default is 'cert.key'. Optional field. Example: 'cert.key'"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the Secret containing the cluster and user certificates and corresponding passwords. Must reside in the same namespace as the workload. Must be a valid DNS-1123 label. Example: 'kafka-cluster-cert'",
+                      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Which data property of the Secret to use as the certificate password. Default is 'cert.password'. Example: 'cert.password'"
+                    }
+                  }
+                }
+              }
+            },
+            "consumerGroupPrefix": {
+              "type": "string",
+              "description": "Prefix used for Kafka consumer group IDs. The actual consumer group ID will be this prefix followed by a partition number. Example: 'ditto-app-id-bridge'"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "Kafka bootstrap servers endpoint. May include multiple brokers comma-separated. Example: 'kafka-0.kafka:9092,kafka-1.kafka:9092'"
+            },
+            "topic": {
+              "type": "string",
+              "description": "Name of the Kafka topic this consumer should read from. Example: 'ditto.app-id.data-bridge'"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DataBridge"
+}

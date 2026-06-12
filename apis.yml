@@ -62,6 +62,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.ditto.live/cloud/http-api/getting-started
+      - type: OpenAPI
+        url: openapi/ditto-live-cloud-http-api-openapi.yml
   - aid: ditto-live:edge-server-http-api
     name: Ditto Edge Server HTTP API
     description: >-
@@ -78,6 +80,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+      - type: OpenAPI
+        url: openapi/ditto-live-operator-api-openapi.yml
 common:
   - type: Website
     url: https://www.ditto.com

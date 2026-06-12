@@ -1,0 +1,17 @@
+{
+  "commands": [
+    {
+      "method": "upsert",
+      "collection": "people",
+      "id": "person-001",
+      "value": {
+        "name": "Susan",
+        "age": 31,
+        "favoriteBook": {
+          "published": 1925,
+          "title": "The Great Gatsby"
+        }
+      }
+    }
+  ]
+}

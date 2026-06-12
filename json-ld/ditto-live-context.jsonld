@@ -1,0 +1,148 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://docs.ditto.live/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Ditto": {
+      "@id": "schema:SoftwareApplication",
+      "@type": "@id"
+    },
+
+    "Document": {
+      "@id": "https://docs.ditto.live/vocab#Document",
+      "@type": "@id"
+    },
+    "_id": {
+      "@id": "schema:identifier"
+    },
+    "collection": {
+      "@id": "https://docs.ditto.live/vocab#collection",
+      "@type": "xsd:string"
+    },
+    "items": {
+      "@id": "https://docs.ditto.live/vocab#items",
+      "@container": "@list"
+    },
+    "mutatedDocumentIds": {
+      "@id": "https://docs.ditto.live/vocab#mutatedDocumentIds",
+      "@container": "@list"
+    },
+
+    "QueryRequest": {
+      "@id": "https://docs.ditto.live/vocab#QueryRequest",
+      "@type": "@id"
+    },
+    "statement": {
+      "@id": "https://docs.ditto.live/vocab#statement",
+      "@type": "xsd:string"
+    },
+    "args": {
+      "@id": "https://docs.ditto.live/vocab#args"
+    },
+    "queryType": {
+      "@id": "https://docs.ditto.live/vocab#queryType",
+      "@type": "xsd:string"
+    },
+    "warnings": {
+      "@id": "https://docs.ditto.live/vocab#warnings",
+      "@container": "@list"
+    },
+    "totalWarningsCount": {
+      "@id": "https://docs.ditto.live/vocab#totalWarningsCount",
+      "@type": "xsd:integer"
+    },
+
+    "WriteRequest": {
+      "@id": "https://docs.ditto.live/vocab#WriteRequest",
+      "@type": "@id"
+    },
+    "WriteCommand": {
+      "@id": "https://docs.ditto.live/vocab#WriteCommand",
+      "@type": "@id"
+    },
+    "commands": {
+      "@id": "https://docs.ditto.live/vocab#commands",
+      "@container": "@list"
+    },
+    "method": {
+      "@id": "https://docs.ditto.live/vocab#method",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "https://docs.ditto.live/vocab#value"
+    },
+
+    "FindRequest": {
+      "@id": "https://docs.ditto.live/vocab#FindRequest",
+      "@type": "@id"
+    },
+    "query": {
+      "@id": "https://docs.ditto.live/vocab#query",
+      "@type": "xsd:string"
+    },
+    "limit": {
+      "@id": "https://docs.ditto.live/vocab#limit",
+      "@type": "xsd:integer"
+    },
+    "offset": {
+      "@id": "https://docs.ditto.live/vocab#offset",
+      "@type": "xsd:integer"
+    },
+    "sort": {
+      "@id": "https://docs.ditto.live/vocab#sort",
+      "@container": "@list"
+    },
+
+    "App": {
+      "@id": "https://docs.ditto.live/vocab#App",
+      "@type": "@id"
+    },
+    "appId": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+
+    "ApiKey": {
+      "@id": "https://docs.ditto.live/vocab#ApiKey",
+      "@type": "@id"
+    },
+    "expiration": {
+      "@id": "schema:expires",
+      "@type": "xsd:dateTime"
+    },
+    "permissions": {
+      "@id": "https://docs.ditto.live/vocab#permissions"
+    },
+
+    "DataBridge": {
+      "@id": "https://docs.ditto.live/vocab#DataBridge",
+      "@type": "@id"
+    },
+    "BigPeerReplication": {
+      "@id": "https://docs.ditto.live/vocab#BigPeerReplication",
+      "@type": "@id"
+    },
+
+    "namespace": {
+      "@id": "https://docs.ditto.live/vocab#namespace",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "error": {
+      "@id": "https://docs.ditto.live/vocab#error"
+    },
+    "message": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    }
+  }
+}
