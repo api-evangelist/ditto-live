@@ -97,7 +97,7 @@ common:
     url: https://www.ditto.com/blog
   - type: Pricing
     url: https://www.ditto.com/pricing/cloud-sync
-  - type: Changelog
+  - type: ChangeLog
     url: https://docs.ditto.live/changelog
   - type: Portal
     url: https://portal.ditto.live
