@@ -83,6 +83,12 @@ apis:
       - type: OpenAPI
         url: openapi/ditto-live-operator-api-openapi.yml
 common:
+  - type: TrustCenter
+    url: security/ditto-live-trust-center.yml
+  - type: DomainSecurity
+    url: security/ditto-live-domain-security.yml
+  - type: Authentication
+    url: authentication/ditto-live-authentication.yml
   - type: Website
     url: https://www.ditto.com
   - type: Documentation

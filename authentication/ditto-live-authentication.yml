@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/ditto-live-cloud-http-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: api_key_or_jwt_token
+  type: http
+  scheme: bearer
+  bearerFormat: API Key or JWT
+  description: Authentication using either an API key or JWT token in the Authorization header
+  sources:
+  - openapi/ditto-live-cloud-http-api-openapi.yml
