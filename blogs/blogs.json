@@ -2,13 +2,14 @@
   "repo": "ditto-live",
   "feeds": [
     {
-      "source": "https://www.ditto.com/blog",
-      "feed_url": "",
+      "source": "https://twitter.com/dittolive",
+      "feed_url": "https://twitter.com/dittolive",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-27T12:36:58Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "agent_pulled": "2026-06-27"
 }
