@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: Ditto HTTP RPC API Keys Sync API
+  version: 4.0.0
+  description: The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.
+servers:
+- url: '{base_url}/api/v4'
+  description: The Ditto Big Peer acts as a central synchronization point and data store in your Ditto network. It coordinates data replication between peers and provides a consistent view of your data.
+  variables:
+    base_url:
+      default: https://YOUR_CLOUD_URL_ENDPOINT
+      description: Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.
+security:
+- api_key_or_jwt_token: []
+tags:
+- name: Sync
+paths:
+  /sync/remote_execute:
+    post:
+      description: Execute a DQL statement on specific connected peers in your Ditto network. This powerful feature allows you to query and manipulate data directly on edge devices that match your specified criteria.
+      operationId: remote_execute_endpoint
+      requestBody:
+        description: Specify both the peer selection criteria (using SYNC CONTEXT) and the DQL statement to execute on matching peers. This enables targeted operations on specific devices or groups of devices in your network.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoteExecuteRequest'
+        required: true
+      responses:
+        '200':
+          description: The remote execution request was processed successfully. Returns results from each matching peer, including any data retrieved, errors encountered, and execution statistics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoteExecuteResponse'
+            application/cbor:
+              schema:
+                $ref: '#/components/schemas/RemoteExecuteResponse'
+        '400':
+          description: The request was invalid. This could be due to incorrect SYNC CONTEXT syntax, invalid DQL statement, or other parameter validation failures. Check the error message for specific details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RpcError'
+            application/cbor:
+              schema:
+                $ref: '#/components/schemas/RpcError'
+        '401':
+          description: Authentication failed. Ensure you're providing a valid API key or JWT token with appropriate permissions for remote execution.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RpcError'
+            application/cbor:
+              schema:
+                $ref: '#/components/schemas/RpcError'
+        '500':
+          description: An unexpected server error occurred while processing the remote execution request. This could be due to network issues, peer connectivity problems, or internal errors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RpcError'
+            application/cbor:
+              schema:
+                $ref: '#/components/schemas/RpcError'
+      deprecated: false
+      tags:
+      - Sync
+components:
+  schemas:
+    RemoteExecuteError:
+      type: object
+      required:
+      - description
+      properties:
+        description:
+          type: string
+    RemoteExecuteResponse:
+      type: object
+      description: Response from executing a remote query across specified peers. Contains results and any errors that occurred.
+      required:
+      - result
+      properties:
+        error:
+          $ref: '#/components/schemas/RemoteExecuteError'
+          description: Any error that prevented the remote query from executing successfully
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteExecutePeerItem'
+          description: Array of results from each peer that executed the query
+    RemoteExecutePeerItem:
+      type: object
+      description: Represents the response data returned from executing a query on a specific peer in the network. Contains query results, timing information, and any errors or warnings that occurred.
+      properties:
+        elapsedMilliseconds:
+          $ref: '#/components/schemas/AnyValue'
+          description: The time taken to execute the query on this peer in milliseconds
+        error:
+          $ref: '#/components/schemas/RemoteExecuteError'
+          description: Any error that occurred while executing the query on this peer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyValue'
+          description: The array of results returned from executing the query on this peer
+        peer:
+          $ref: '#/components/schemas/AnyValue'
+          description: Information identifying the specific peer that executed the query
+        totalWarningsCount:
+          $ref: '#/components/schemas/AnyValue'
+          description: Total number of warnings generated during query execution on this peer
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyValue'
+          description: Array of warnings generated during query execution on this peer
+    AnyValue: {}
+    RemoteExecuteRequest:
+      type: object
+      description: Request object for executing a DQL query remotely on specific peers in the network. The query must include a SYNC CONTEXT clause to specify target peers.
+      required:
+      - statement
+      properties:
+        args:
+          $ref: '#/components/schemas/AnyValue'
+          description: Optional parameterized arguments to use in the query statement
+        statement:
+          type: string
+          description: A DQL statement that must include a SYNC CONTEXT clause to specify target peers. See https://docs.ditto.live/dql-guide for syntax details.
+      example:
+        statement: SYNC CONTEXT ( PEERS WHERE peerKeyString = 'pkAg' ) SELECT * FROM cars WHERE _id = '1'
+    RpcError:
+      type: object
+      description: Error response returned when an API request fails
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable description of what went wrong
+      example:
+        message: Some kind of human readable description of the error
+  securitySchemes:
+    api_key_or_jwt_token:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key or JWT
+      description: Authentication using either an API key or JWT token in the Authorization header
+externalDocs:
+  url: https://docs.ditto.live/http/installation/
+  description: For more detailed instructions on how to use this API and the Ditto SDK, please see the documentation.

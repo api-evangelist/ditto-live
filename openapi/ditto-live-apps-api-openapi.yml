@@ -1,0 +1,620 @@
+openapi: 3.0.3
+info:
+  title: Ditto HTTP RPC API Keys Apps API
+  version: 4.0.0
+  description: The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.
+servers:
+- url: '{base_url}/api/v4'
+  description: The Ditto Big Peer acts as a central synchronization point and data store in your Ditto network. It coordinates data replication between peers and provides a consistent view of your data.
+  variables:
+    base_url:
+      default: https://YOUR_CLOUD_URL_ENDPOINT
+      description: Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.
+security:
+- api_key_or_jwt_token: []
+tags:
+- name: Apps
+paths:
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app:
+    get:
+      tags:
+      - Apps
+      summary: List Apps
+      description: Lists all apps associated with a particular Big Peer instance.
+      operationId: listApps
+      responses:
+        '200':
+          description: list of apps associated with a big peer instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse_App'
+              examples:
+                Apps:
+                  value:
+                    meta:
+                      page: 1
+                      size: 2
+                      totalPages: 1
+                    data:
+                    - name: minimal
+                      appId: ad349e91-3e4c-44bb-9278-fc5bb80239b5
+                    - name: my-app
+                      appId: cb692760-9786-44c3-b040-019bec5a1b77
+    post:
+      tags:
+      - Apps
+      summary: Create App
+      description: Creates an app associated with a particular Big Peer instance.
+      operationId: createApp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/App'
+        required: true
+      responses:
+        '200':
+          description: Big Peer app successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+              examples:
+                App:
+                  value:
+                    name: my-app
+                    appId: cb692760-9786-44c3-b040-019bec5a1b77
+        '400':
+          description: app id is not unique
+          content:
+            application/json:
+              examples:
+                AppIdNotUnique:
+                  summary: there is already an app with the same id, managed by this big peer
+        '404':
+          description: Big Peer in URI params does not exist
+          content:
+            application/json:
+              examples:
+                BigPeerNotFound:
+                  summary: big peer not found
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}:
+    get:
+      tags:
+      - Apps
+      summary: Get App
+      description: Retrieves details for a specific Big Peer app.
+      operationId: getApp
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+              examples:
+                App:
+                  value:
+                    name: my-app
+                    appId: cb692760-9786-44c3-b040-019bec5a1b77
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: app not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: big peer app not found
+    put:
+      tags:
+      - Apps
+      summary: Update App
+      description: Updates an existing Big Peer app's configuration.
+      operationId: updateApp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppRequest'
+        required: true
+      responses:
+        '200':
+          description: App successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: app not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: big peer app not found
+    delete:
+      tags:
+      - Apps
+      summary: Delete App
+      description: Deletes a Big Peer app and all associated resources.
+      operationId: deleteApp
+      responses:
+        '200':
+          description: Big Peer app successfully deleted
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: app not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: big peer app not found
+    patch:
+      tags:
+      - Apps
+      summary: Update App
+      description: Updates an existing Big Peer app's configuration.
+      operationId: updateApp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppRequest'
+        required: true
+      responses:
+        '200':
+          description: App successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: app not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: big peer app not found
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}/bigPeerReplication:
+    post:
+      tags:
+      - Apps
+      summary: Create Replication
+      description: Creates a new Big Peer to Big Peer replication for an app.
+      operationId: createReplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BigPeerReplication'
+        required: true
+      responses:
+        '200':
+          description: Big Peer replication successfully created for app
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigPeerReplication'
+        '404':
+          description: Big Peer in URI params does not exist
+          content:
+            application/json:
+              examples:
+                BigPeerNotFound:
+                  summary: big peer not found
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}/bigPeerReplication/{replication_name}:
+    get:
+      tags:
+      - Apps
+      summary: Get Replication
+      description: Retrieves details for a specific Big Peer replication.
+      operationId: getReplication
+      responses:
+        '200':
+          description: big peer replication successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigPeerReplication'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                AppNameMismatch:
+                  summary: app in big peer replication label doesn't match uri parameter
+        '404':
+          description: big peer replication not found
+          content:
+            application/json:
+              examples:
+                BigPeerReplicationNotFound:
+                  summary: big peer replication not found
+    put:
+      tags:
+      - Apps
+      summary: Update Replication
+      description: Updates an existing Big Peer replication's configuration.
+      operationId: updateReplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBigPeerReplicationRequest'
+        required: true
+      responses:
+        '200':
+          description: Big Peer replication successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigPeerReplication'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                AppNameMismatch:
+                  summary: app in big peer replication label doesn't match uri parameter
+        '404':
+          description: big peer replication not found
+          content:
+            application/json:
+              examples:
+                BigPeerReplicationNotFound:
+                  summary: big peer replication not found
+    delete:
+      tags:
+      - Apps
+      summary: Delete Replication
+      description: Deletes a Big Peer replication.
+      operationId: deleteReplication
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                AppNameMismatch:
+                  summary: app name in big peer replication label doesn't match uri parameter
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: big peer replication not found
+          content:
+            application/json:
+              examples:
+                BigPeerReplicationNotFound:
+                  summary: big peer replication not found
+    patch:
+      tags:
+      - Apps
+      summary: Update Replication
+      description: Updates an existing Big Peer replication's configuration.
+      operationId: updateReplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBigPeerReplicationRequest'
+        required: true
+      responses:
+        '200':
+          description: Big Peer replication successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigPeerReplication'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                AppNameMismatch:
+                  summary: app in big peer replication label doesn't match uri parameter
+        '404':
+          description: big peer replication not found
+          content:
+            application/json:
+              examples:
+                BigPeerReplicationNotFound:
+                  summary: big peer replication not found
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}/provider:
+    post:
+      tags:
+      - Apps
+      summary: Add Auth Provider
+      description: Adds or updates an auth provider for a Big Peer app. If a provider with the same name already exists, it will be overwritten with the new provider config.
+      operationId: createProvider
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddProviderRequest'
+        required: true
+      responses:
+        '200':
+          description: Auth provider successfully added or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: app not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: big peer app not found
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}/provider/{provider_name}:
+    post:
+      tags:
+      - Apps
+      summary: Delete Auth Provider
+      description: Deletes an auth provider from a Big Peer app.
+      operationId: deleteProviderPost
+      responses:
+        '200':
+          description: Auth provider successfully deleted
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: resource not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: big peer app not found
+                AuthProviderNotFound:
+                  summary: app auth provider not found
+components:
+  schemas:
+    App:
+      type: object
+      required:
+      - name
+      properties:
+        appId:
+          type: string
+          title: AppId
+          format: uuid
+          description: UUID used to identify a BigPeerApp resource
+        authProviders:
+          type: object
+          title: AuthProviders
+          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
+          additionalProperties:
+            $ref: '#/components/schemas/ProviderConfig'
+        name:
+          type: string
+          title: Dns1123Label
+          description: "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123"
+          maxLength: 63
+          minLength: 1
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+    BigPeerReplication:
+      type: object
+      required:
+      - name
+      properties:
+        connections:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uri
+          description: 'A set of connection addresses of other Big Peer instances.
+
+
+            Each connection address should point to the Big Peer replication server dedicated to the
+
+            same app ID.
+
+
+            The set is allowed to be empty. In this case, it''s the remote Big Peer''s responsibility to
+
+            initiate the connection.'
+          example:
+          - big-peer-2.ditto.svc.cluster.local:4040
+          uniqueItems: true
+        name:
+          type: string
+          title: Dns1123Label
+          description: "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123"
+          maxLength: 63
+          minLength: 1
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+        queriesByCollection:
+          type:
+          - object
+          - 'null'
+          description: 'Mapping from collection name to a list of DQL subscriptions queries.
+
+            This contains the data that the Big Peer instance will subscribe to, for the given app, in
+
+            the context of Big Peer replication.
+
+            If empty, this Big Peer instance will not subscribe to any data so no data will be
+
+            replicated to it.'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          propertyNames:
+            type: string
+          example:
+            cars:
+            - 'true'
+    UpdateAppRequest:
+      type: object
+      required:
+      - authProviders
+      properties:
+        authProviders:
+          type: object
+          title: AuthProviders
+          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
+          additionalProperties:
+            $ref: '#/components/schemas/ProviderConfig'
+    ListResponse_App:
+      type: object
+      required:
+      - meta
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        meta:
+          $ref: '#/components/schemas/ListResponseMeta'
+    AddProviderRequest:
+      type: object
+      required:
+      - name
+      - config
+      properties:
+        config:
+          oneOf:
+          - type: object
+            title: TokenWebhook
+            description: Token webhook authentication provider. Validates device tokens by calling a user-provided webhook URL. The webhook receives the token and returns the authenticated user information and permissions.
+            properties:
+              type:
+                type: string
+                enum:
+                - webhookUrl
+              webhookUrl:
+                type: string
+                format: uri
+          - type: object
+            title: Anonymous
+            description: This is a configuration setting for an anonymous provider. This contains what permissions to give anonymous users, how long their sessions should last and a shared token. The purpose of the shared token is to prevent random scanners on the internet from grabbing tokens. The token isn't considered private or secure since it will be embedded in a client software.
+            required:
+            - permission
+            - sessionLength
+            - sharedToken
+            - type
+            properties:
+              permission:
+                $ref: '#/components/schemas/Permission'
+              sessionLength:
+                type: integer
+                format: u-int32
+                description: Session length in seconds. Minimum is 1 second.
+                minimum: 1
+              sharedToken:
+                type: string
+              type:
+                type: string
+                enum:
+                - anonymous
+          title: ProviderConfig
+          description: This describes the document stored in the __auth_config with the _id of auth_config. It describes the auth providers configured for a BigPeer App.
+        name:
+          type: string
+    ListResponseMeta:
+      type: object
+      required:
+      - page
+      - size
+      - totalPages
+      properties:
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
+    UpdateBigPeerReplicationRequest:
+      type: object
+      properties:
+        connections:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uri
+          example:
+          - big-peer-2.ditto.svc.cluster.local:4040
+          uniqueItems: true
+        queriesByCollection:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          propertyNames:
+            type: string
+          example:
+            cars:
+            - 'true'
+  securitySchemes:
+    api_key_or_jwt_token:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key or JWT
+      description: Authentication using either an API key or JWT token in the Authorization header
+externalDocs:
+  url: https://docs.ditto.live/http/installation/
+  description: For more detailed instructions on how to use this API and the Ditto SDK, please see the documentation.

@@ -1,0 +1,245 @@
+openapi: 3.0.3
+info:
+  title: Ditto HTTP RPC API Keys API
+  version: 4.0.0
+  description: The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.
+servers:
+- url: '{base_url}/api/v4'
+  description: The Ditto Big Peer acts as a central synchronization point and data store in your Ditto network. It coordinates data replication between peers and provides a consistent view of your data.
+  variables:
+    base_url:
+      default: https://YOUR_CLOUD_URL_ENDPOINT
+      description: Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.
+security:
+- api_key_or_jwt_token: []
+tags:
+- name: API Keys
+  description: Big Peer HTTP API keys
+paths:
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}/apiKey:
+    get:
+      tags:
+      - API Keys
+      summary: List API Keys
+      description: Lists all API keys associated with a Big Peer app.
+      operationId: listApiKeys
+      responses:
+        '200':
+          description: list of api keys associated with a big peer app
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse_ApiKey'
+              examples:
+                ApiKeys:
+                  value:
+                    meta:
+                      page: 1
+                      size: 1
+                      totalPages: 1
+                    data:
+                    - name: my-key
+                      expiresAt: '2100-04-13T12:00:00Z'
+                      permissions:
+                        remoteQuery: true
+                        read:
+                          everything: true
+                          queriesByCollection: {}
+                        write:
+                          everything: true
+                          queriesByCollection: {}
+                      description: null
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: app not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: big peer app not found
+    post:
+      tags:
+      - API Keys
+      summary: Create API Key
+      description: Creates a new API key for authenticating against the Big Peer HTTP API.
+      operationId: createApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKey'
+        required: true
+      responses:
+        '200':
+          description: Plaintext API key.
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+                InvalidApiKeyExpiryDate:
+                  summary: attempt to create api key with past expiry date
+        '404':
+          description: app specified in URI params does not exist
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: big peer app not found
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}/apiKey/{api_key_name}:
+    get:
+      tags:
+      - API Keys
+      summary: Get API Key
+      description: Retrieves details for a specific API key.
+      operationId: getApiKey
+      responses:
+        '200':
+          description: api key successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: api key not found
+          content:
+            application/json:
+              examples:
+                ApiKeyNotFound:
+                  summary: api key not found
+    delete:
+      tags:
+      - API Keys
+      summary: Delete API Key
+      description: Deletes an API key.
+      operationId: deleteApiKey
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                AppNameMismatch:
+                  summary: app name in api key label doesn't match uri parameter
+                BigPeerNameMismatch:
+                  summary: big peer in app label doesn't match uri parameter
+        '404':
+          description: api key not found
+          content:
+            application/json:
+              examples:
+                ApiKeyNotFound:
+                  summary: api key key not found
+components:
+  schemas:
+    ApiKey:
+      type: object
+      required:
+      - name
+      - expiresAt
+      - permissions
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          example: API key used for staging environment.
+        expiresAt:
+          type: string
+          format: date-time
+          example: '2100-04-13T12:00:00Z'
+        name:
+          type: string
+          title: Dns1123Label
+          description: "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123"
+          maxLength: 63
+          minLength: 1
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+        permissions:
+          type: object
+          title: Permission
+          description: Set of permissions granted to a particular API key or device token.
+          required:
+          - read
+          - write
+          properties:
+            qlVersion:
+              type: integer
+              format: u-int8
+              description: What query language version are the queries written in? If 1, use DQL. If 0, use legacy query builder. Other numbers are not valid. Defaults to 0.
+              default: 0
+              enum:
+              - 0
+              - 1
+            read:
+              $ref: '#/components/schemas/PermissionRules'
+              description: The set of read permissions granted
+            remoteQuery:
+              type: boolean
+              description: Can this initiate remote queries? In addition to this, remote queries also require full read permission.
+              default: false
+            write:
+              $ref: '#/components/schemas/PermissionRules'
+              description: The set of write permissions granted
+    ListResponse_ApiKey:
+      type: object
+      required:
+      - meta
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKey'
+        meta:
+          $ref: '#/components/schemas/ListResponseMeta'
+    ListResponseMeta:
+      type: object
+      required:
+      - page
+      - size
+      - totalPages
+      properties:
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
+  securitySchemes:
+    api_key_or_jwt_token:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key or JWT
+      description: Authentication using either an API key or JWT token in the Authorization header
+externalDocs:
+  url: https://docs.ditto.live/http/installation/
+  description: For more detailed instructions on how to use this API and the Ditto SDK, please see the documentation.

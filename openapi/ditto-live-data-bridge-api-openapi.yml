@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  title: Ditto HTTP RPC API Keys Data Bridge API
+  version: 4.0.0
+  description: The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.
+servers:
+- url: '{base_url}/api/v4'
+  description: The Ditto Big Peer acts as a central synchronization point and data store in your Ditto network. It coordinates data replication between peers and provides a consistent view of your data.
+  variables:
+    base_url:
+      default: https://YOUR_CLOUD_URL_ENDPOINT
+      description: Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.
+security:
+- api_key_or_jwt_token: []
+tags:
+- name: Data Bridge
+  description: Apps' data bridges (CDC)
+paths:
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}/dataBridge:
+    get:
+      tags:
+      - Data Bridge
+      summary: List Data Bridges
+      description: Lists all data bridges (CDC or MongoDB Connector) associated with a Big Peer app.
+      operationId: listDataBridges
+      responses:
+        '200':
+          description: List of data bridges for the app
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse_DataBridgeObject'
+        '404':
+          description: App not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: app not found
+    post:
+      tags:
+      - Data Bridge
+      summary: Create Data Bridge
+      description: Creates a new data bridge for CDC or MongoDB Connector integration.
+      operationId: createDataBridge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataBridgeRequest'
+        required: true
+      responses:
+        '201':
+          description: Data bridge successfully created for app
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataBridgeObject'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                WebhookNotSupported:
+                  summary: webhook destinations are not supported
+        '404':
+          description: App not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: app not found
+  /namespace/{namespace}/bigPeer/{big_peer_name}/app/{app_name}/dataBridge/{data_bridge_name}:
+    get:
+      tags:
+      - Data Bridge
+      summary: Get Data Bridge
+      description: Retrieves details for a specific data bridge.
+      operationId: getDataBridge
+      responses:
+        '200':
+          description: Data bridge details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataBridgeObject'
+        '404':
+          description: App or data bridge not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: app not found
+                DataBridgeNotFound:
+                  summary: data bridge not found
+    delete:
+      tags:
+      - Data Bridge
+      summary: Delete Data Bridge
+      description: Deletes a data bridge.
+      operationId: deleteDataBridge
+      responses:
+        '204':
+          description: Data bridge successfully deleted
+          content:
+            application/json:
+              schema:
+                default: null
+        '404':
+          description: App or data bridge not found
+          content:
+            application/json:
+              examples:
+                AppNotFound:
+                  summary: app not found
+                DataBridgeNotFound:
+                  summary: data bridge not found
+components:
+  securitySchemes:
+    api_key_or_jwt_token:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key or JWT
+      description: Authentication using either an API key or JWT token in the Authorization header
+externalDocs:
+  url: https://docs.ditto.live/http/installation/
+  description: For more detailed instructions on how to use this API and the Ditto SDK, please see the documentation.
