@@ -13,7 +13,20 @@ description: >-
   mobile and edge workloads — retail, manufacturing, aviation, healthcare —
   where connectivity is intermittent or absent.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ditto-live.png
 tags:
   - Developer Tools
   - Database
@@ -27,61 +40,106 @@ created: '2026-06-12'
 modified: '2026-06-12'
 specificationVersion: '0.19'
 apis:
-  - aid: ditto-live:sdk
-    name: Ditto SDK
-    description: >-
-      Multi-platform embeddable SDK for peer-to-peer and cloud-synced data
-      storage. Supports Swift, Kotlin, Flutter, React Native, JavaScript,
-      .NET/C#, C++, Rust, Go, and Java. Developers use DQL to create, read,
-      update, delete, and observe documents that sync automatically over
-      Bluetooth, WiFi Direct, LAN, and cloud transports.
-    humanURL: https://docs.ditto.live/sdk/latest/home
-    tags:
-      - SDK
-      - Peer-to-Peer
-      - Offline-First
-      - Database
-    properties:
-      - type: Documentation
-        url: https://docs.ditto.live/sdk/latest/home
-  - aid: ditto-live:cloud-http-api
-    name: Ditto Cloud HTTP API
-    description: >-
-      REST-style HTTP API (v4/v5) for querying and mutating data in the Ditto
-      Big Peer cloud platform. Authenticated with a static API key via Bearer
-      token. The primary endpoint accepts DQL statements via POST to
-      /api/v5/store/execute under a per-app cloud URL. A Swagger spec is
-      published alongside each deployment.
-    humanURL: https://docs.ditto.live/cloud/http-api/getting-started
-    baseURL: https://{app-id}.cloud.dittolive.app
-    tags:
-      - REST
-      - Cloud
-      - Database
-      - DQL
-    properties:
-      - type: Documentation
-        url: https://docs.ditto.live/cloud/http-api/getting-started
-      - type: OpenAPI
-        url: openapi/ditto-live-cloud-http-api-openapi.yml
-  - aid: ditto-live:edge-server-http-api
-    name: Ditto Edge Server HTTP API
-    description: >-
-      Local HTTP API exposed by the Ditto Edge Server process running on-device
-      or on an edge node. Provides endpoints for executing DQL queries, health
-      checks, peer-presence status, and log retrieval. Supports configurable
-      per-IP, per-API-key, and per-route rate limiting.
-    humanURL: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
-    tags:
-      - Edge
-      - HTTP API
-      - DQL
-      - Local
-    properties:
-      - type: Documentation
-        url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
-      - type: OpenAPI
-        url: openapi/ditto-live-operator-api-openapi.yml
+- aid: ditto-live:sdk
+  name: Ditto SDK
+  description: >-
+    Multi-platform embeddable SDK for peer-to-peer and cloud-synced data storage. Supports Swift, Kotlin,
+    Flutter, React Native, JavaScript, .NET/C#, C++, Rust, Go, and Java. Developers use DQL to create,
+    read, update, delete, and observe documents that sync automatically over Bluetooth, WiFi Direct, LAN,
+    and cloud transports.
+  humanURL: https://docs.ditto.live/sdk/latest/home
+  tags:
+  - SDK
+  - Peer-to-Peer
+  - Offline-First
+  - Database
+  properties:
+  - type: Documentation
+    url: https://docs.ditto.live/sdk/latest/home
+- aid: ditto-live:ditto-live-api-keys-api
+  name: Ditto API Keys API
+  description: Big Peer HTTP API keys
+  humanURL: https://docs.ditto.live/sdk/latest/home
+  baseURL: https://{app-id}.cloud.dittolive.app
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/ditto-live-api-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ditto.live/cloud/http-api/getting-started
+  - type: Documentation
+    url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+- aid: ditto-live:ditto-live-apps-api
+  name: Ditto Apps API
+  description: The Apps API from Ditto — 6 operation(s) for apps.
+  humanURL: https://docs.ditto.live/sdk/latest/home
+  baseURL: https://{app-id}.cloud.dittolive.app
+  tags:
+  - Apps
+  properties:
+  - type: OpenAPI
+    url: openapi/ditto-live-apps-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ditto.live/cloud/http-api/getting-started
+  - type: Documentation
+    url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+- aid: ditto-live:ditto-live-bigpeerreplication-api
+  name: Ditto BigPeerReplication API
+  description: The BigPeerReplication API from Ditto — 2 operation(s) for bigpeerreplication.
+  humanURL: https://docs.ditto.live/sdk/latest/home
+  baseURL: https://{app-id}.cloud.dittolive.app
+  tags:
+  - BigPeerReplication
+  properties:
+  - type: OpenAPI
+    url: openapi/ditto-live-bigpeerreplication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ditto.live/cloud/http-api/getting-started
+  - type: Documentation
+    url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+- aid: ditto-live:ditto-live-data-bridge-api
+  name: Ditto Data Bridge API
+  description: Apps' data bridges (CDC)
+  humanURL: https://docs.ditto.live/sdk/latest/home
+  baseURL: https://{app-id}.cloud.dittolive.app
+  tags:
+  - Data Bridge
+  properties:
+  - type: OpenAPI
+    url: openapi/ditto-live-data-bridge-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ditto.live/cloud/http-api/getting-started
+  - type: Documentation
+    url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+- aid: ditto-live:ditto-live-store-api
+  name: Ditto Store API
+  description: The Store API from Ditto — 5 operation(s) for store.
+  humanURL: https://docs.ditto.live/sdk/latest/home
+  baseURL: https://{app-id}.cloud.dittolive.app
+  tags:
+  - Store
+  properties:
+  - type: OpenAPI
+    url: openapi/ditto-live-store-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ditto.live/cloud/http-api/getting-started
+  - type: Documentation
+    url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
+- aid: ditto-live:ditto-live-sync-api
+  name: Ditto Sync API
+  description: The Sync API from Ditto — 1 operation(s) for sync.
+  humanURL: https://docs.ditto.live/sdk/latest/home
+  baseURL: https://{app-id}.cloud.dittolive.app
+  tags:
+  - Sync
+  properties:
+  - type: OpenAPI
+    url: openapi/ditto-live-sync-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ditto.live/cloud/http-api/getting-started
+  - type: Documentation
+    url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
 common:
   - type: AgenticAccess
     url: agentic-access/ditto-live-agentic-access.yml
