@@ -1,0 +1,31 @@
+{
+  "provider": "ditto-live",
+  "sources": [
+    "ditto-live-api-keys-api-openapi.yml",
+    "ditto-live-apps-api-openapi.yml",
+    "ditto-live-bigpeerreplication-api-openapi.yml",
+    "ditto-live-data-bridge-api-openapi.yml",
+    "ditto-live-store-api-openapi.yml",
+    "ditto-live-sync-api-openapi.yml"
+  ],
+  "outputs": [
+    "ditto-live-api-keys-api-openapi.yml",
+    "ditto-live-apps-api-openapi.yml",
+    "ditto-live-bigpeerreplication-api-openapi.yml",
+    "ditto-live-data-bridge-api-openapi.yml",
+    "ditto-live-store-api-openapi.yml",
+    "ditto-live-sync-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [
+    "ditto-live-api-keys-api-openapi.yml: dangling $ref: #/components/schemas/PermissionRules",
+    "ditto-live-apps-api-openapi.yml: dangling $ref: #/components/schemas/Permission",
+    "ditto-live-apps-api-openapi.yml: dangling $ref: #/components/schemas/ProviderConfig",
+    "ditto-live-data-bridge-api-openapi.yml: dangling $ref: #/components/schemas/DataBridgeObject",
+    "ditto-live-data-bridge-api-openapi.yml: dangling $ref: #/components/schemas/DataBridgeRequest",
+    "ditto-live-data-bridge-api-openapi.yml: dangling $ref: #/components/schemas/ListResponse_DataBridgeObject"
+  ],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
