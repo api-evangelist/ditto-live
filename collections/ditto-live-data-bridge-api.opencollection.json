@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ditto HTTP RPC API Keys Data Bridge API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Bridge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Data Bridges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/dataBridge"
+          },
+          "docs": "Lists all data bridges (CDC or MongoDB Connector) associated with a Big Peer app."
+        },
+        {
+          "info": {
+            "name": "Create Data Bridge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/dataBridge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data bridge for CDC or MongoDB Connector integration."
+        },
+        {
+          "info": {
+            "name": "Get Data Bridge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/dataBridge/:data_bridge_name"
+          },
+          "docs": "Retrieves details for a specific data bridge."
+        },
+        {
+          "info": {
+            "name": "Delete Data Bridge",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/dataBridge/:data_bridge_name"
+          },
+          "docs": "Deletes a data bridge."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

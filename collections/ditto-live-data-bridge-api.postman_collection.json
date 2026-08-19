@@ -1,0 +1,789 @@
+{
+  "item": [
+    {
+      "id": "b83722d2-f7aa-4ae7-a3f8-1da5dd2ee313",
+      "name": "Data Bridge",
+      "description": {
+        "content": "Apps' data bridges (CDC)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2283ff16-a072-46ce-8e4d-210003f4ad94",
+          "name": "List Data Bridges",
+          "request": {
+            "name": "List Data Bridges",
+            "description": {
+              "content": "Lists all data bridges (CDC or MongoDB Connector) associated with a Big Peer app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "dataBridge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ddafb451-bc2f-4709-ae3a-d5d56990ae8c",
+              "name": "List of data bridges for the app",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16898165-9a6d-4d47-a376-912ef32400aa",
+              "name": "App not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d5a4dea-fca1-4f16-aa69-a6b2826987ad",
+          "name": "Create Data Bridge",
+          "request": {
+            "name": "Create Data Bridge",
+            "description": {
+              "content": "Creates a new data bridge for CDC or MongoDB Connector integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "dataBridge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "02ed9088-ef0a-4e80-b49a-2b06ed1d5b00",
+              "name": "Data bridge successfully created for app",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0910d23-b397-4d4a-a354-8d350609e083",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"webhook destinations are not supported\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c142746b-db95-43be-bf38-1060cfd93015",
+              "name": "App not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94b0a1e5-216c-465a-8b88-8602f2a78d10",
+          "name": "Get Data Bridge",
+          "request": {
+            "name": "Get Data Bridge",
+            "description": {
+              "content": "Retrieves details for a specific data bridge.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "dataBridge",
+                ":data_bridge_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ef7a295-6f2b-439c-9fb5-aa0700ac5a91",
+              "name": "Data bridge details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge",
+                    ":data_bridge_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c577d647-a20b-495f-b6de-4028dea2f9cc",
+              "name": "App or data bridge not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge",
+                    ":data_bridge_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c01302c0-303c-46a7-a8a1-aa0b8bbae924",
+          "name": "Delete Data Bridge",
+          "request": {
+            "name": "Delete Data Bridge",
+            "description": {
+              "content": "Deletes a data bridge.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "dataBridge",
+                ":data_bridge_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b94b06a5-09cd-462d-948b-688b8e8fe524",
+              "name": "Data bridge successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge",
+                    ":data_bridge_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f8dae87-a4cc-4a22-90d4-fc844a7089ee",
+              "name": "App or data bridge not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "dataBridge",
+                    ":data_bridge_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https://YOUR_CLOUD_URL_ENDPOINT",
+      "key": "base_url"
+    },
+    {
+      "type": "string",
+      "value": "{{base_url}}/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "88306215-288e-497e-ae65-0e6885ad37b8",
+    "name": "Ditto HTTP RPC API Keys Data Bridge API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.",
+      "type": "text/plain"
+    }
+  }
+}

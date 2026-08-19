@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ditto HTTP RPC API Keys Apps API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app"
+          },
+          "docs": "Lists all apps associated with a particular Big Peer instance."
+        },
+        {
+          "info": {
+            "name": "Create App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an app associated with a particular Big Peer instance."
+        },
+        {
+          "info": {
+            "name": "Get App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name"
+          },
+          "docs": "Retrieves details for a specific Big Peer app."
+        },
+        {
+          "info": {
+            "name": "Update App",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Big Peer app's configuration."
+        },
+        {
+          "info": {
+            "name": "Update App",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Big Peer app's configuration."
+        },
+        {
+          "info": {
+            "name": "Delete App",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name"
+          },
+          "docs": "Deletes a Big Peer app and all associated resources."
+        },
+        {
+          "info": {
+            "name": "Create Replication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/bigPeerReplication",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Big Peer to Big Peer replication for an app."
+        },
+        {
+          "info": {
+            "name": "Get Replication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/bigPeerReplication/:replication_name"
+          },
+          "docs": "Retrieves details for a specific Big Peer replication."
+        },
+        {
+          "info": {
+            "name": "Update Replication",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/bigPeerReplication/:replication_name",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Big Peer replication's configuration."
+        },
+        {
+          "info": {
+            "name": "Update Replication",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/bigPeerReplication/:replication_name",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Big Peer replication's configuration."
+        },
+        {
+          "info": {
+            "name": "Delete Replication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/bigPeerReplication/:replication_name"
+          },
+          "docs": "Deletes a Big Peer replication."
+        },
+        {
+          "info": {
+            "name": "Add Auth Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/provider",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds or updates an auth provider for a Big Peer app. If a provider with the same name already exists, it will be overwritten with the new provider config."
+        },
+        {
+          "info": {
+            "name": "Delete Auth Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/provider/:provider_name"
+          },
+          "docs": "Deletes an auth provider from a Big Peer app."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

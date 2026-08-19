@@ -1,0 +1,342 @@
+{
+  "item": [
+    {
+      "id": "7d8aba1c-8703-4272-bdc8-ba9c64cf1919",
+      "name": "Sync",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "15cc49b4-a82c-445f-8c76-7b7b71b754b0",
+          "name": "remote execute endpoint",
+          "request": {
+            "name": "remote execute endpoint",
+            "description": {
+              "content": "Execute a DQL statement on specific connected peers in your Ditto network. This powerful feature allows you to query and manipulate data directly on edge devices that match your specified criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sync",
+                "remote_execute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"statement\": \"<string>\",\n  \"args\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e91102e0-a583-462f-aca9-305008ea4aa0",
+              "name": "The remote execution request was processed successfully. Returns results from each matching peer, including any data retrieved, errors encountered, and execution statistics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sync",
+                    "remote_execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SYNC CONTEXT ( PEERS WHERE peerKeyString = 'pkAg' ) SELECT * FROM cars WHERE _id = '1'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"elapsedMilliseconds\": {},\n      \"error\": {\n        \"description\": \"string\"\n      },\n      \"peer\": {},\n      \"totalWarningsCount\": {}\n    },\n    {\n      \"elapsedMilliseconds\": {},\n      \"error\": {\n        \"description\": \"string\"\n      },\n      \"peer\": {},\n      \"totalWarningsCount\": {}\n    }\n  ],\n  \"error\": {\n    \"description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21c7ef9e-f2f5-4bd6-ba83-a679d0888a41",
+              "name": "The request was invalid. This could be due to incorrect SYNC CONTEXT syntax, invalid DQL statement, or other parameter validation failures. Check the error message for specific details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sync",
+                    "remote_execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SYNC CONTEXT ( PEERS WHERE peerKeyString = 'pkAg' ) SELECT * FROM cars WHERE _id = '1'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c54d1f50-f044-4e39-8919-11ac57db420e",
+              "name": "Authentication failed. Ensure you're providing a valid API key or JWT token with appropriate permissions for remote execution.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sync",
+                    "remote_execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SYNC CONTEXT ( PEERS WHERE peerKeyString = 'pkAg' ) SELECT * FROM cars WHERE _id = '1'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e216b73d-53fd-40b9-8051-5d50aec82591",
+              "name": "An unexpected server error occurred while processing the remote execution request. This could be due to network issues, peer connectivity problems, or internal errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sync",
+                    "remote_execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SYNC CONTEXT ( PEERS WHERE peerKeyString = 'pkAg' ) SELECT * FROM cars WHERE _id = '1'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https://YOUR_CLOUD_URL_ENDPOINT",
+      "key": "base_url"
+    },
+    {
+      "type": "string",
+      "value": "{{base_url}}/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b50aafcd-0d06-44a8-b4ea-c17c137b2ee4",
+    "name": "Ditto HTTP RPC API Keys Sync API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.",
+      "type": "text/plain"
+    }
+  }
+}

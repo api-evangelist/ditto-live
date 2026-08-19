@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ditto HTTP RPC API Keys Store API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Store",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "count_endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/store/count",
+            "headers": [
+              {
+                "name": "X-DITTO-TXN-ID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Count the number of documents in a collection that match a specified query. This endpoint is useful for pagination, analytics, and understanding the size of your dataset."
+        },
+        {
+          "info": {
+            "name": "Execute a DQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/store/execute",
+            "headers": [
+              {
+                "name": "X-DITTO-TXN-ID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a Ditto Query Language (DQL) statement against your data store. DQL is a powerful query language that supports complex queries, updates, and data manipulation. This endpoint serves as the primary interface for running DQL operations. See the comprehensive DQL guide for detailed syntax and examples."
+        },
+        {
+          "info": {
+            "name": "find_endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/store/find",
+            "headers": [
+              {
+                "name": "X-DITTO-TXN-ID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query documents in a collection using a flexible query language. This endpoint supports pagination, sorting, and complex queries to help you efficiently retrieve exactly the data you need."
+        },
+        {
+          "info": {
+            "name": "find_by_id_endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/store/findbyid",
+            "headers": [
+              {
+                "name": "X-DITTO-TXN-ID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve a single document by its unique identifier. This is the most efficient way to fetch a specific document when you know its ID."
+        },
+        {
+          "info": {
+            "name": "write_endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/store/write",
+            "headers": [
+              {
+                "name": "X-DITTO-TXN-ID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform one or more write operations (updates, upserts, or removals) in a single atomic transaction. This endpoint ensures all operations either succeed or fail together, maintaining data consistency."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

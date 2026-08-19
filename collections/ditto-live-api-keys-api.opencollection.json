@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ditto HTTP RPC API Keys API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/apiKey"
+          },
+          "docs": "Lists all API keys associated with a Big Peer app."
+        },
+        {
+          "info": {
+            "name": "Create API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/apiKey",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new API key for authenticating against the Big Peer HTTP API."
+        },
+        {
+          "info": {
+            "name": "Get API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/apiKey/:api_key_name"
+          },
+          "docs": "Retrieves details for a specific API key."
+        },
+        {
+          "info": {
+            "name": "Delete API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{base_url}/api/v4/namespace/:namespace/bigPeer/:big_peer_name/app/:app_name/apiKey/:api_key_name"
+          },
+          "docs": "Deletes an API key."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

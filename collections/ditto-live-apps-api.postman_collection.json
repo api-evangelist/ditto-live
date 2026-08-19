@@ -1,0 +1,2931 @@
+{
+  "item": [
+    {
+      "id": "b5ee948e-fe38-4b2a-8fa3-de17c3652be0",
+      "name": "Apps",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "db124623-5f86-44a7-a0cf-cecbd3a515d7",
+          "name": "List Apps",
+          "request": {
+            "name": "List Apps",
+            "description": {
+              "content": "Lists all apps associated with a particular Big Peer instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69f2fa03-bb01-4e81-b06e-97c5bf443da8",
+              "name": "list of apps associated with a big peer instance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"page\": 1,\n    \"size\": 2,\n    \"totalPages\": 1\n  },\n  \"data\": [\n    {\n      \"name\": \"minimal\",\n      \"appId\": \"ad349e91-3e4c-44bb-9278-fc5bb80239b5\"\n    },\n    {\n      \"name\": \"my-app\",\n      \"appId\": \"cb692760-9786-44c3-b040-019bec5a1b77\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47331a2b-0f55-4a47-8074-7b3a7fa02ddd",
+          "name": "Create App",
+          "request": {
+            "name": "Create App",
+            "description": {
+              "content": "Creates an app associated with a particular Big Peer instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"appId\": \"<uuid>\",\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e8c8b0c-8c8f-41a2-81d2-fc2846dcb7e5",
+              "name": "Big Peer app successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"appId\": \"<uuid>\",\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-app\",\n  \"appId\": \"cb692760-9786-44c3-b040-019bec5a1b77\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8e20179-b4d1-46d2-b914-28d6fcf2fe18",
+              "name": "app id is not unique",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"appId\": \"<uuid>\",\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"there is already an app with the same id, managed by this big peer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cd10314-14eb-4a51-b4ee-cfdc11d7f0d8",
+              "name": "Big Peer in URI params does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"appId\": \"<uuid>\",\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2359002f-0412-4152-b501-aaf3dd29a807",
+          "name": "Get App",
+          "request": {
+            "name": "Get App",
+            "description": {
+              "content": "Retrieves details for a specific Big Peer app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "966094e1-bbe3-490a-9cc6-8e0819d2d8f8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-app\",\n  \"appId\": \"cb692760-9786-44c3-b040-019bec5a1b77\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dabff762-c2fc-471e-9f23-edc34385b814",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer in app label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18c6f53f-593f-4ceb-afc6-2f3dd2ca9624",
+              "name": "app not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dc50b96-67e7-429e-9bc8-56ed08f2334e",
+          "name": "Update App",
+          "request": {
+            "name": "Update App",
+            "description": {
+              "content": "Updates an existing Big Peer app's configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10660448-f642-41f5-9a46-a9f537f07a9a",
+              "name": "App successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"appId\": \"<uuid>\",\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "654a1463-9e9d-49ac-96a5-54c5af84b851",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer in app label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84b3438b-67a8-44ca-9a4d-b2af2dcfe467",
+              "name": "app not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e835619f-9f0a-4492-9ee7-e02f39834397",
+          "name": "Delete App",
+          "request": {
+            "name": "Delete App",
+            "description": {
+              "content": "Deletes a Big Peer app and all associated resources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd1686fe-af2d-435f-a339-1f6b023d2c4b",
+              "name": "Big Peer app successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c6f2b5a-8a59-4b4b-90ec-6f97d33a70a7",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer in app label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbfeb263-75ec-41f8-8d16-b02271ab6d3c",
+              "name": "app not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d035cbc7-db7f-4204-9bd5-62db75ec6e6f",
+          "name": "Update App",
+          "request": {
+            "name": "Update App",
+            "description": {
+              "content": "Updates an existing Big Peer app's configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d0e52a1-5894-4b9d-9dec-b86c95b4b56d",
+              "name": "App successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"appId\": \"<uuid>\",\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9c243c9-12e7-4b2b-b7ac-9be982060421",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer in app label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a9ef782-52b0-4a00-a2aa-f9981e3419f6",
+              "name": "app not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42552e68-7802-4791-a927-de7a5fe0d08e",
+          "name": "Create Replication",
+          "request": {
+            "name": "Create Replication",
+            "description": {
+              "content": "Creates a new Big Peer to Big Peer replication for an app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "bigPeerReplication"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"connections\": \"<array,null>\",\n  \"queriesByCollection\": \"<object,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e9d4ed1-f784-437c-8f37-c3cf6ea560bb",
+              "name": "Big Peer replication successfully created for app",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13b27538-30a8-420e-a312-69a14786415a",
+              "name": "Big Peer in URI params does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d172f9a3-65c6-404f-b2d8-765828125256",
+          "name": "Get Replication",
+          "request": {
+            "name": "Get Replication",
+            "description": {
+              "content": "Retrieves details for a specific Big Peer replication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "bigPeerReplication",
+                ":replication_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07af1032-deb7-4cab-84a3-aae6535cb8b9",
+              "name": "big peer replication successfully retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8bb03c0-3e73-4e06-a857-e862c7481e54",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"app in big peer replication label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8784353-795a-434f-abcd-17abb544a411",
+              "name": "big peer replication not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer replication not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ba2bd8b-c90d-4866-86a7-ddd5cf3ea19a",
+          "name": "Update Replication",
+          "request": {
+            "name": "Update Replication",
+            "description": {
+              "content": "Updates an existing Big Peer replication's configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "bigPeerReplication",
+                ":replication_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connections\": \"<array,null>\",\n  \"queriesByCollection\": \"<object,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ffc833ba-da71-466d-958b-03c608518aa8",
+              "name": "Big Peer replication successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "754d1cba-2ea4-4178-8944-d90f7d482489",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"app in big peer replication label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28d236ca-7f11-4231-9cff-8babe57394da",
+              "name": "big peer replication not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer replication not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ed8ed8b-a98a-47d3-86c6-c9b882f99e10",
+          "name": "Delete Replication",
+          "request": {
+            "name": "Delete Replication",
+            "description": {
+              "content": "Deletes a Big Peer replication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "bigPeerReplication",
+                ":replication_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66470ddd-4ac4-4504-9a08-a6eff88cbbdd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e4f6853-8340-49ff-b6e3-54162b426e69",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"app name in big peer replication label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae4c0138-1090-4408-9cee-b670d819790f",
+              "name": "big peer replication not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer replication not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9717b86a-a9d8-4433-b8ff-33f45e694795",
+          "name": "Update Replication",
+          "request": {
+            "name": "Update Replication",
+            "description": {
+              "content": "Updates an existing Big Peer replication's configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "bigPeerReplication",
+                ":replication_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connections\": \"<array,null>\",\n  \"queriesByCollection\": \"<object,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a05d27fc-74e2-4f97-a64b-75999ddad0b3",
+              "name": "Big Peer replication successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "687fee12-bbd1-4d7b-86c6-1c8aa65536a4",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"app in big peer replication label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a2213b4-d016-4153-a138-dd75885797b3",
+              "name": "big peer replication not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "bigPeerReplication",
+                    ":replication_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connections\": [\n    \"big-peer-2.ditto.svc.cluster.local:4040\"\n  ],\n  \"queriesByCollection\": {\n    \"cars\": [\n      \"true\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer replication not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08f3290b-5e8a-43c7-b929-07c858f3530a",
+          "name": "Add Auth Provider",
+          "request": {
+            "name": "Add Auth Provider",
+            "description": {
+              "content": "Adds or updates an auth provider for a Big Peer app. If a provider with the same name already exists, it will be overwritten with the new provider config.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "provider"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"type\": \"<string>\",\n    \"webhookUrl\": \"<uri>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0379b92f-cba9-4368-99ce-23ad59570ec0",
+              "name": "Auth provider successfully added or updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"type\": \"<string>\",\n    \"webhookUrl\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"appId\": \"<uuid>\",\n  \"authProviders\": {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/ProviderConfig not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e3fa767-728e-49c2-aa08-3e8df5a7b99f",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"type\": \"<string>\",\n    \"webhookUrl\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer in app label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fdbd821-907e-4f2b-8a04-1c880526e2d4",
+              "name": "app not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"config\": {\n    \"type\": \"<string>\",\n    \"webhookUrl\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "305e6fd9-99ed-4e6f-912c-d1af1dc75a3a",
+          "name": "Delete Auth Provider",
+          "request": {
+            "name": "Delete Auth Provider",
+            "description": {
+              "content": "Deletes an auth provider from a Big Peer app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "namespace",
+                ":namespace",
+                "bigPeer",
+                ":big_peer_name",
+                "app",
+                ":app_name",
+                "provider",
+                ":provider_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fdcf7d2-7b86-433d-9d99-8b1adc766ed7",
+              "name": "Auth provider successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "provider",
+                    ":provider_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2464225-ed26-4ff6-986b-3fbb190460e9",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "provider",
+                    ":provider_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer in app label doesn't match uri parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb85d086-10ea-4c56-8976-a84351d0b1bb",
+              "name": "resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "namespace",
+                    ":namespace",
+                    "bigPeer",
+                    ":big_peer_name",
+                    "app",
+                    ":app_name",
+                    "provider",
+                    ":provider_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"big peer app not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https://YOUR_CLOUD_URL_ENDPOINT",
+      "key": "base_url"
+    },
+    {
+      "type": "string",
+      "value": "{{base_url}}/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "47ceab28-99fc-4088-b753-f9d11092cf74",
+    "name": "Ditto HTTP RPC API Keys Apps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.",
+      "type": "text/plain"
+    }
+  }
+}

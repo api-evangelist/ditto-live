@@ -1,0 +1,1920 @@
+{
+  "item": [
+    {
+      "id": "b8937ad0-f7da-4304-b434-2247d13f3490",
+      "name": "Store",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "88942b77-a252-45bd-860d-e294f1c81493",
+          "name": "count endpoint",
+          "request": {
+            "name": "count endpoint",
+            "description": {
+              "content": "Count the number of documents in a collection that match a specified query. This endpoint is useful for pagination, analytics, and understanding the size of your dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optional transaction ID header that ensures consistency. If specified, the operation will only proceed if the Big Peer's transaction ID is equal to or greater than this value. This prevents reading stale data by ensuring you're operating on a sufficiently up-to-date version of the database.",
+                "key": "X-DITTO-TXN-ID",
+                "value": "<long>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"collection\": \"<string>\",\n  \"query\": \"<string>\",\n  \"args\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93c23d2c-32e4-42d0-8092-4d2cc56acc19",
+              "name": "The count operation completed successfully. Returns the total number of matching documents and the transaction ID of the operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID header that ensures consistency. If specified, the operation will only proceed if the Big Peer's transaction ID is equal to or greater than this value. This prevents reading stale data by ensuring you're operating on a sufficiently up-to-date version of the database.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"people\",\n  \"query\": \"favoriteBook.title == 'The Great Gatsby'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 100,\n  \"txnId\": 9000\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f7aabb6-88b2-42e1-9953-c51dc50bd1a6",
+              "name": "The request was malformed. This typically indicates an invalid query syntax, unknown collection, or invalid parameters. Check the error message for specific details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID header that ensures consistency. If specified, the operation will only proceed if the Big Peer's transaction ID is equal to or greater than this value. This prevents reading stale data by ensuring you're operating on a sufficiently up-to-date version of the database.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"people\",\n  \"query\": \"favoriteBook.title == 'The Great Gatsby'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3ddc117-c626-4c8e-8392-a5616905e796",
+              "name": "Authentication failed. Ensure you're providing a valid API key or JWT token in the Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID header that ensures consistency. If specified, the operation will only proceed if the Big Peer's transaction ID is equal to or greater than this value. This prevents reading stale data by ensuring you're operating on a sufficiently up-to-date version of the database.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"people\",\n  \"query\": \"favoriteBook.title == 'The Great Gatsby'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77128198-2161-407c-a114-0d0251739a73",
+              "name": "An unexpected error occurred on the server. This could indicate a temporary service disruption or internal error. Retry the request after a brief delay.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID header that ensures consistency. If specified, the operation will only proceed if the Big Peer's transaction ID is equal to or greater than this value. This prevents reading stale data by ensuring you're operating on a sufficiently up-to-date version of the database.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"people\",\n  \"query\": \"favoriteBook.title == 'The Great Gatsby'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "978e0fda-db4a-476f-9cff-553a09851431",
+          "name": "Execute a DQL query",
+          "request": {
+            "name": "Execute a DQL query",
+            "description": {
+              "content": "Execute a Ditto Query Language (DQL) statement against your data store. DQL is a powerful query language that supports complex queries, updates, and data manipulation. This endpoint serves as the primary interface for running DQL operations. See the comprehensive DQL guide for detailed syntax and examples.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "execute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optional transaction ID that ensures consistency across operations. When provided, the operation will only execute if the Big Peer's current transaction ID meets or exceeds this value, preventing stale reads and ensuring causal consistency in your application.",
+                "key": "X-DITTO-TXN-ID",
+                "value": "<long>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"statement\": \"<string>\",\n  \"args\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8613cef0-ca78-4be0-8c8c-f804b6dfdff9",
+              "name": "The DQL statement executed successfully. The response includes the results of the query, any mutated document IDs, the transaction ID, and any warnings that occurred during execution. For SELECT queries, results appear in the items array. For mutations, affected IDs appear in mutatedDocumentIds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures consistency across operations. When provided, the operation will only execute if the Big Peer's current transaction ID meets or exceeds this value, preventing stale reads and ensuring causal consistency in your application.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SELECT * FROM people WHERE favoriteBook.title = :title\",\n  \"args\": {\n    \"title\": \"The Great Gatsby\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": 100,\n  \"queryType\": \"select\",\n  \"items\": [\n    {\n      \"_id\": 1,\n      \"name\": \"Francis\",\n      \"favoriteBook\": {\n        \"title\": \"The Great Gatsby\",\n        \"published\": 1925\n      }\n    }\n  ],\n  \"mutatedDocumentIds\": [],\n  \"error\": {},\n  \"warnings\": [],\n  \"totalWarningsCount\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bae51a22-4f4e-46e6-9481-5754ea22ce08",
+              "name": "The DQL statement was invalid or malformed. This could be due to syntax errors, invalid collection names, type mismatches, or other query validation failures. Check the error response for detailed information about what went wrong.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures consistency across operations. When provided, the operation will only execute if the Big Peer's current transaction ID meets or exceeds this value, preventing stale reads and ensuring causal consistency in your application.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SELECT * FROM people WHERE favoriteBook.title = :title\",\n  \"args\": {\n    \"title\": \"The Great Gatsby\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryType\": \"unknown\",\n  \"items\": [],\n  \"mutatedDocumentIds\": [],\n  \"error\": {\n    \"description\": \"...\"\n  },\n  \"warnings\": [],\n  \"totalWarningsCount\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c3ced97-ba0c-4479-b381-3bb5fc9369c6",
+              "name": "Authentication failed. Ensure you're providing a valid API key or JWT token in the Authorization header and that it has sufficient permissions for the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures consistency across operations. When provided, the operation will only execute if the Big Peer's current transaction ID meets or exceeds this value, preventing stale reads and ensuring causal consistency in your application.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SELECT * FROM people WHERE favoriteBook.title = :title\",\n  \"args\": {\n    \"title\": \"The Great Gatsby\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryType\": \"unknown\",\n  \"items\": [],\n  \"mutatedDocumentIds\": [],\n  \"error\": {\n    \"description\": \"...\"\n  },\n  \"warnings\": [],\n  \"totalWarningsCount\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a033481-d0dc-41f3-9b32-919df4230dc7",
+              "name": "The requested transaction ID (if specified) is not available on the Big Peer. This typically means the Big Peer has not yet reached that transaction ID or the transaction has been garbage collected.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures consistency across operations. When provided, the operation will only execute if the Big Peer's current transaction ID meets or exceeds this value, preventing stale reads and ensuring causal consistency in your application.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SELECT * FROM people WHERE favoriteBook.title = :title\",\n  \"args\": {\n    \"title\": \"The Great Gatsby\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryType\": \"unknown\",\n  \"items\": [],\n  \"mutatedDocumentIds\": [],\n  \"error\": {\n    \"description\": \"...\"\n  },\n  \"warnings\": [],\n  \"totalWarningsCount\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9adad804-ff3f-4aed-a5c6-54dc3f2a25bb",
+              "name": "The query execution timed out. This can happen with complex queries over large datasets or when the system is under heavy load. Consider optimizing your query or adding appropriate indexes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures consistency across operations. When provided, the operation will only execute if the Big Peer's current transaction ID meets or exceeds this value, preventing stale reads and ensuring causal consistency in your application.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SELECT * FROM people WHERE favoriteBook.title = :title\",\n  \"args\": {\n    \"title\": \"The Great Gatsby\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryType\": \"unknown\",\n  \"items\": [],\n  \"mutatedDocumentIds\": [],\n  \"error\": {\n    \"description\": \"...\"\n  },\n  \"warnings\": [],\n  \"totalWarningsCount\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ab2082a-4a58-4283-acbc-ec1ed1a28c8d",
+              "name": "An unexpected server error occurred while executing the query. This could be due to resource constraints, internal errors, or temporary service disruptions. The operation may succeed if retried.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures consistency across operations. When provided, the operation will only execute if the Big Peer's current transaction ID meets or exceeds this value, preventing stale reads and ensuring causal consistency in your application.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SELECT * FROM people WHERE favoriteBook.title = :title\",\n  \"args\": {\n    \"title\": \"The Great Gatsby\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryType\": \"unknown\",\n  \"items\": [],\n  \"mutatedDocumentIds\": [],\n  \"error\": {\n    \"description\": \"...\"\n  },\n  \"warnings\": [],\n  \"totalWarningsCount\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdb9346d-748a-405b-860f-b9201a6e5d0d",
+              "name": "The service is temporarily unavailable, typically due to maintenance or capacity issues. Clients should implement exponential backoff and retry the request later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures consistency across operations. When provided, the operation will only execute if the Big Peer's current transaction ID meets or exceeds this value, preventing stale reads and ensuring causal consistency in your application.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"statement\": \"SELECT * FROM people WHERE favoriteBook.title = :title\",\n  \"args\": {\n    \"title\": \"The Great Gatsby\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryType\": \"unknown\",\n  \"items\": [],\n  \"mutatedDocumentIds\": [],\n  \"error\": {\n    \"description\": \"...\"\n  },\n  \"warnings\": [],\n  \"totalWarningsCount\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f8b764e-4fd7-495c-8fcd-d27c87a443b3",
+          "name": "find endpoint",
+          "request": {
+            "name": "find endpoint",
+            "description": {
+              "content": "Query documents in a collection using a flexible query language. This endpoint supports pagination, sorting, and complex queries to help you efficiently retrieve exactly the data you need.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "find"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optional transaction ID that ensures read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                "key": "X-DITTO-TXN-ID",
+                "value": "<long>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"collection\": \"<string>\",\n  \"query\": \"<string>\",\n  \"args\": {},\n  \"describe\": false,\n  \"formatAttachment\": false,\n  \"limit\": 1000,\n  \"offset\": \"<integer>\",\n  \"serializedAs\": \"latestValues\",\n  \"sort\": [\n    {\n      \"property\": \"<string>\",\n      \"direction\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"direction\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dafd3415-8846-416c-b59f-af66fcb6a316",
+              "name": "The query executed successfully. Returns an array of matching documents and the transaction ID of the read operation. If no documents match, the documents array will be empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"people\",\n  \"query\": \"favoriteBook.title == 'The Great Gatsby'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"id\": {},\n      \"fields\": {}\n    },\n    {\n      \"id\": {},\n      \"fields\": {}\n    }\n  ],\n  \"txnId\": 4615\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22403a0a-93ca-438a-9f1f-4408bade08d1",
+              "name": "The request was invalid. This could be due to malformed query syntax, invalid collection name, or invalid parameter values. Check the error message for details on how to correct the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"people\",\n  \"query\": \"favoriteBook.title == 'The Great Gatsby'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7c427ae-074e-45f8-954a-93d2e0ee5c8a",
+              "name": "Authentication failed. Verify that you're providing a valid API key or JWT token and that it has appropriate read permissions for the requested collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"people\",\n  \"query\": \"favoriteBook.title == 'The Great Gatsby'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "333ed0d8-6c58-4783-9f6d-1dfb74b355df",
+              "name": "An unexpected server error occurred. This could be due to resource constraints or internal errors. The request may succeed if retried after a brief delay.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"people\",\n  \"query\": \"favoriteBook.title == 'The Great Gatsby'\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8edf9fe6-f66f-440c-8912-14910abd826d",
+          "name": "find by id endpoint",
+          "request": {
+            "name": "find by id endpoint",
+            "description": {
+              "content": "Retrieve a single document by its unique identifier. This is the most efficient way to fetch a specific document when you know its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "findbyid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optional transaction ID for ensuring read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                "key": "X-DITTO-TXN-ID",
+                "value": "<long>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"collection\": \"<string>\",\n  \"id\": {},\n  \"formatAttachment\": false,\n  \"serializedAs\": \"latestValues\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e38f3e6-7b8b-4d7f-b3d4-10b487c7730b",
+              "name": "The document was found and retrieved successfully. Returns the document data along with the transaction ID of the read operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "findbyid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID for ensuring read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"<string>\",\n  \"id\": {},\n  \"formatAttachment\": false,\n  \"serializedAs\": \"latestValues\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": {},\n  \"fields\": {},\n  \"txnId\": 140\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d199e42-8368-4079-96de-745023c151e6",
+              "name": "The request was invalid. This could be due to an invalid ID format, unknown collection, or other parameter validation failures. Check the error message for specific details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "findbyid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID for ensuring read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"<string>\",\n  \"id\": {},\n  \"formatAttachment\": false,\n  \"serializedAs\": \"latestValues\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9c490a8-a32a-4b49-b722-01b409dcf150",
+              "name": "Authentication failed. Ensure you're providing a valid API key or JWT token with appropriate read permissions for the requested collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "findbyid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID for ensuring read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"<string>\",\n  \"id\": {},\n  \"formatAttachment\": false,\n  \"serializedAs\": \"latestValues\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fffd302f-a455-4f8c-a229-ac0ad2393a93",
+              "name": "An unexpected server error occurred. This could be due to resource constraints or internal errors. The request may succeed if retried after a brief delay.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "findbyid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID for ensuring read consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing reads of stale data.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"collection\": \"<string>\",\n  \"id\": {},\n  \"formatAttachment\": false,\n  \"serializedAs\": \"latestValues\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "144cd25d-4cb8-4aa7-863c-f1b43c91bddc",
+          "name": "write endpoint",
+          "request": {
+            "name": "write endpoint",
+            "description": {
+              "content": "Perform one or more write operations (updates, upserts, or removals) in a single atomic transaction. This endpoint ensures all operations either succeed or fail together, maintaining data consistency.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "write"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                  "type": "any",
+                  "value": "{{base_url}}",
+                  "key": "base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optional transaction ID that ensures write consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing concurrent modification issues.",
+                "key": "X-DITTO-TXN-ID",
+                "value": "<long>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"commands\": [\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    },\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96373e0a-397b-4cd7-a7f9-12ede2a24dae",
+              "name": "The write operations completed successfully. Returns results for each command, including the new transaction ID and counts of affected documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "write"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures write consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing concurrent modification issues.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"commands\": [\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    },\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"error\": 3009,\n      \"method\": \"update\",\n      \"transactionId\": 9202,\n      \"updated\": 853,\n      \"internalError\": 5360,\n      \"permissionDenied\": 9893\n    },\n    {\n      \"error\": 6026,\n      \"method\": \"update\",\n      \"transactionId\": 8423,\n      \"updated\": 5846,\n      \"internalError\": 2975,\n      \"permissionDenied\": 8932\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8921452-8e13-41bb-99ed-6a88f853db06",
+              "name": "The request was invalid. This could be due to malformed commands, invalid collection names, or data validation failures. Check the error message for details on the specific issue.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "write"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures write consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing concurrent modification issues.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"commands\": [\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    },\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e27825a2-af7e-4b65-8815-191ecdafbdec",
+              "name": "Authentication failed. Verify that you're providing a valid API key or JWT token with appropriate write permissions for the affected collections.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "write"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures write consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing concurrent modification issues.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"commands\": [\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    },\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a576db0-396f-4633-92a3-15520adf438c",
+              "name": "The authenticated user lacks permission to perform one or more of the requested write operations. Check your access control settings and ensure proper authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "write"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures write consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing concurrent modification issues.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"commands\": [\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    },\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ef2c18c-dc49-48e6-b5a6-2f7255cbc2d0",
+              "name": "An unexpected server error occurred during the write operation. The transaction was rolled back to maintain consistency. Retry the request after a brief delay.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "write"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+                      "type": "any",
+                      "value": "{{base_url}}",
+                      "key": "base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional transaction ID that ensures write consistency. The operation will only proceed if the Big Peer's transaction ID is at least this value, preventing concurrent modification issues.",
+                    "key": "X-DITTO-TXN-ID",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"commands\": [\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    },\n    {\n      \"collection\": \"<string>\",\n      \"commands\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"method\": \"<string>\",\n      \"query\": \"<string>\",\n      \"args\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Some kind of human readable description of the error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https://YOUR_CLOUD_URL_ENDPOINT",
+      "key": "base_url"
+    },
+    {
+      "type": "string",
+      "value": "{{base_url}}/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "72705ce1-c164-4ad8-ab9b-7926e738eac6",
+    "name": "Ditto HTTP RPC API Keys Store API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.",
+      "type": "text/plain"
+    }
+  }
+}

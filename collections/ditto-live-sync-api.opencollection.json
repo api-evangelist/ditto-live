@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ditto HTTP RPC API Keys Sync API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "remote_execute_endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{base_url}/api/v4/sync/remote_execute",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a DQL statement on specific connected peers in your Ditto network. This powerful feature allows you to query and manipulate data directly on edge devices that match your specified criteria."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
