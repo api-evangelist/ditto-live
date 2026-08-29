@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Ditto HTTP RPC API Keys Store API
+  title: Ditto HTTP RPC Store API
   version: 4.0.0
   description: The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.
 servers:
@@ -391,35 +391,122 @@ paths:
       - Store
 components:
   schemas:
-    Upsert:
+    QueryResponseWarning:
       type: object
-      description: Command to insert a new document or update an existing one if it already exists
+      description: Indicates any run-time warnings that might arise during query execution
       required:
-      - collection
+      - description
+      properties:
+        _id:
+          $ref: '#/components/schemas/AnyValue'
+        description:
+          type: string
+    UpdateCommand:
+      type: object
+      description: Specifies how to modify a field in matching documents
+      required:
+      - method
+      - path
       - value
       properties:
-        collection:
+        method:
+          $ref: '#/components/schemas/UpdateCommandMethod'
+          description: Type of update operation to perform
+        path:
           type: string
-          description: Name of the collection to upsert the document into
-        id:
-          $ref: '#/components/schemas/AnyValue'
-          description: Optional ID for the document. If not provided, one will be generated
+          description: Path to the field to update within the document
         value:
           $ref: '#/components/schemas/AnyValue'
-          description: Document data to insert or update
-        valueTypeOverrides:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/TypeOverride'
-          description: Optional type overrides for specific fields in the document
-    UpdateCommandMethod:
-      type: string
-      description: Types of update operations that can be performed on document fields
-      enum:
-      - set
-      - setAttachment
-      - increment
-      - replaceWithCounter
+          description: New value to set for the field
+    QueryResponse:
+      type: object
+      description: Response from executing a DQL statement. Contains query results, affected document IDs, and any warnings or errors that occurred.
+      required:
+      - queryType
+      - items
+      - mutatedDocumentIds
+      - warnings
+      - totalWarningsCount
+      properties:
+        error:
+          $ref: '#/components/schemas/QueryResponseError'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyValue'
+        mutatedDocumentIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyValue'
+        queryType:
+          type: string
+          description: Indicates the type of query that was executed
+        totalWarningsCount:
+          type: integer
+          format: int64
+          description: Total number of warnings generated during query execution
+        transactionId:
+          type: integer
+          format: int64
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryResponseWarning'
+    UpsertResult:
+      type: object
+      description: Result of executing an upsert operation
+      required:
+      - transactionId
+      properties:
+        transactionId:
+          type: integer
+          format: int64
+          description: Transaction ID of the upsert operation
+    RemoveResult:
+      type: object
+      description: Result of executing a remove operation
+      required:
+      - transactionId
+      - deleted
+      properties:
+        deleted:
+          type: integer
+          format: int64
+          description: Number of documents successfully deleted
+        internalError:
+          type: integer
+          format: int64
+          description: Number of documents that failed to delete due to internal errors
+        permissionDenied:
+          type: integer
+          format: int64
+          description: Number of documents that couldn't be deleted due to insufficient permissions
+        transactionId:
+          type: integer
+          format: int64
+          description: Transaction ID of the remove operation
+    Update:
+      type: object
+      description: Command to update existing documents in a collection that match a query
+      required:
+      - collection
+      - query
+      - commands
+      properties:
+        args:
+          $ref: '#/components/schemas/AnyValue'
+          description: Optional parameterized arguments to use in the query
+        collection:
+          type: string
+          description: Name of the collection containing documents to update
+        commands:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateCommand'
+          description: Array of update operations to apply to matching documents
+        query:
+          type: string
+          description: Query expression that identifies which documents to update
     Remove:
       type: object
       description: Command to remove documents or fields from a collection that match the specified query
@@ -436,12 +523,44 @@ components:
         query:
           type: string
           description: Query expression that identifies which documents to remove
-    Direction:
-      type: string
-      description: Sort direction for query results. Use 'asc' for ascending order (A to Z, 1 to 9) or 'desc' for descending order (Z to A, 9 to 1).
-      enum:
-      - asc
-      - desc
+    RpcError:
+      type: object
+      description: Error response returned when an API request fails
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable description of what went wrong
+      example:
+        message: Some kind of human readable description of the error
+    FindByIdResponse:
+      allOf:
+      - $ref: '#/components/schemas/Document'
+      - type: object
+        properties:
+          txnId:
+            type: integer
+            format: int64
+            description: The transaction ID at which this document was retrieved, useful for consistency tracking
+    CountResponse:
+      type: object
+      description: Response from a count operation, providing both the count and transaction ID for consistency tracking.
+      required:
+      - count
+      - txnId
+      properties:
+        count:
+          type: integer
+          format: int64
+          description: The total number of documents that matched the query criteria
+        txnId:
+          type: integer
+          format: int64
+          description: The transaction ID at which this count was performed, useful for consistency checks
+      example:
+        count: 100
+        txnId: 9000
     UpdateResult:
       type: object
       description: Result of executing an update operation
@@ -470,6 +589,113 @@ components:
           type: integer
           format: int64
           description: Number of documents successfully updated
+    QueryRequest:
+      type: object
+      description: Request parameters for executing a DQL statement. DQL is Ditto's powerful query language that supports complex queries and data modifications.
+      required:
+      - statement
+      properties:
+        args:
+          $ref: '#/components/schemas/AnyValue'
+          description: Named parameters to use in the DQL statement, providing safe value substitution and better query performance
+        statement:
+          type: string
+          description: The DQL statement to execute. See https://docs.ditto.live/dql-guide for comprehensive documentation on DQL syntax and features.
+      example:
+        statement: SELECT * FROM people WHERE favoriteBook.title = :title
+        args:
+          title: The Great Gatsby
+    Document:
+      type: object
+      description: Represents a document in the Ditto store. Documents are schema-free and can contain nested fields of various CRDT types for conflict-free replication.
+      required:
+      - id
+      - fields
+      properties:
+        fields:
+          $ref: '#/components/schemas/AnyValue'
+          description: The document's content, which can include any valid JSON data types and special Ditto CRDT types
+        id:
+          $ref: '#/components/schemas/AnyValue'
+          description: The unique identifier for this document within its collection
+    SerializedAs:
+      type: string
+      description: Controls how document values are serialized in responses
+      default: latestValues
+      enum:
+      - latestValues
+      - latestValuesAndTypes
+    CountRequest:
+      type: object
+      description: Request parameters for counting documents in a collection. Use this to get the total number of documents matching specific criteria.
+      required:
+      - collection
+      - query
+      properties:
+        args:
+          $ref: '#/components/schemas/AnyValue'
+          description: Optional parameters to use in the parameterized query, providing safe value substitution
+        collection:
+          type: string
+          description: The name of the collection to count documents in
+        query:
+          type: string
+          description: A query expression that filters which documents to count. Use parameterized values with :param syntax for better security and performance
+      example:
+        collection: people
+        query: favoriteBook.title == 'The Great Gatsby'
+    TypeOverride:
+      type: string
+      description: Specifies special data types for fields when upserting documents
+      enum:
+      - counter
+      - register
+      - attachment
+    Direction:
+      type: string
+      description: Sort direction for query results. Use 'asc' for ascending order (A to Z, 1 to 9) or 'desc' for descending order (Z to A, 9 to 1).
+      enum:
+      - asc
+      - desc
+    WriteCommandResult:
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/UpdateResult'
+        - type: object
+          required:
+          - method
+          properties:
+            method:
+              type: string
+              enum:
+              - update
+      - allOf:
+        - $ref: '#/components/schemas/UpsertResult'
+        - type: object
+          required:
+          - method
+          properties:
+            method:
+              type: string
+              enum:
+              - upsert
+      - allOf:
+        - $ref: '#/components/schemas/RemoveResult'
+        - type: object
+          required:
+          - method
+          properties:
+            method:
+              type: string
+              enum:
+              - remove
+      description: Result of executing a write command. Contains the specific result type based on the command method.
+      discriminator:
+        propertyName: method
+        mapping:
+          remove: '#/components/schemas/RemoveResult'
+          update: '#/components/schemas/UpdateResult'
+          upsert: '#/components/schemas/UpsertResult'
     FindRequest:
       type: object
       description: Request parameters for querying documents in a collection. Supports filtering, pagination, and sorting to help you retrieve exactly the data you need.
@@ -514,22 +740,20 @@ components:
       example:
         collection: people
         query: favoriteBook.title == 'The Great Gatsby'
-    QueryRequest:
+    Sort:
       type: object
-      description: Request parameters for executing a DQL statement. DQL is Ditto's powerful query language that supports complex queries and data modifications.
+      description: Specifies how to sort query results by a property
       required:
-      - statement
+      - property
+      - direction
       properties:
-        args:
-          $ref: '#/components/schemas/AnyValue'
-          description: Named parameters to use in the DQL statement, providing safe value substitution and better query performance
-        statement:
+        direction:
+          $ref: '#/components/schemas/Direction'
+          description: Sort direction (ascending or descending)
+        property:
           type: string
-          description: The DQL statement to execute. See https://docs.ditto.live/dql-guide for comprehensive documentation on DQL syntax and features.
-      example:
-        statement: SELECT * FROM people WHERE favoriteBook.title = :title
-        args:
-          title: The Great Gatsby
+          description: Document property to sort by
+    AnyValue: {}
     WriteCommand:
       oneOf:
       - allOf:
@@ -569,184 +793,14 @@ components:
           remove: '#/components/schemas/Remove'
           update: '#/components/schemas/Update'
           upsert: '#/components/schemas/Upsert'
-    AnyValue: {}
-    Update:
-      type: object
-      description: Command to update existing documents in a collection that match a query
-      required:
-      - collection
-      - query
-      - commands
-      properties:
-        args:
-          $ref: '#/components/schemas/AnyValue'
-          description: Optional parameterized arguments to use in the query
-        collection:
-          type: string
-          description: Name of the collection containing documents to update
-        commands:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateCommand'
-          description: Array of update operations to apply to matching documents
-        query:
-          type: string
-          description: Query expression that identifies which documents to update
-    FindByIdResponse:
-      allOf:
-      - $ref: '#/components/schemas/Document'
-      - type: object
-        properties:
-          txnId:
-            type: integer
-            format: int64
-            description: The transaction ID at which this document was retrieved, useful for consistency tracking
-    CountRequest:
-      type: object
-      description: Request parameters for counting documents in a collection. Use this to get the total number of documents matching specific criteria.
-      required:
-      - collection
-      - query
-      properties:
-        args:
-          $ref: '#/components/schemas/AnyValue'
-          description: Optional parameters to use in the parameterized query, providing safe value substitution
-        collection:
-          type: string
-          description: The name of the collection to count documents in
-        query:
-          type: string
-          description: A query expression that filters which documents to count. Use parameterized values with :param syntax for better security and performance
-      example:
-        collection: people
-        query: favoriteBook.title == 'The Great Gatsby'
-    FindByIdRequest:
-      type: object
-      description: Request parameters for retrieving a specific document by its ID. This is the most efficient way to fetch a single document when you know its identifier.
-      required:
-      - collection
-      - id
-      properties:
-        collection:
-          type: string
-          description: The name of the collection containing the document
-        formatAttachment:
-          type: boolean
-          default: false
-          description: When true, any attachment fields will be formatted for easier consumption
-        id:
-          $ref: '#/components/schemas/AnyValue'
-          description: The unique identifier of the document to retrieve
-        serializedAs:
-          $ref: '#/components/schemas/SerializedAs'
-          description: Controls how the document data is serialized in the response
-      example:
-        collection: people
-        id: abc123
-    QueryResponseWarning:
-      type: object
-      description: Indicates any run-time warnings that might arise during query execution
-      required:
-      - description
-      properties:
-        _id:
-          $ref: '#/components/schemas/AnyValue'
-        description:
-          type: string
-    UpdateCommand:
-      type: object
-      description: Specifies how to modify a field in matching documents
-      required:
-      - method
-      - path
-      - value
-      properties:
-        method:
-          $ref: '#/components/schemas/UpdateCommandMethod'
-          description: Type of update operation to perform
-        path:
-          type: string
-          description: Path to the field to update within the document
-        value:
-          $ref: '#/components/schemas/AnyValue'
-          description: New value to set for the field
-    Sort:
-      type: object
-      description: Specifies how to sort query results by a property
-      required:
-      - property
-      - direction
-      properties:
-        direction:
-          $ref: '#/components/schemas/Direction'
-          description: Sort direction (ascending or descending)
-        property:
-          type: string
-          description: Document property to sort by
-    TypeOverride:
+    UpdateCommandMethod:
       type: string
-      description: Specifies special data types for fields when upserting documents
+      description: Types of update operations that can be performed on document fields
       enum:
-      - counter
-      - register
-      - attachment
-    RemoveResult:
-      type: object
-      description: Result of executing a remove operation
-      required:
-      - transactionId
-      - deleted
-      properties:
-        deleted:
-          type: integer
-          format: int64
-          description: Number of documents successfully deleted
-        internalError:
-          type: integer
-          format: int64
-          description: Number of documents that failed to delete due to internal errors
-        permissionDenied:
-          type: integer
-          format: int64
-          description: Number of documents that couldn't be deleted due to insufficient permissions
-        transactionId:
-          type: integer
-          format: int64
-          description: Transaction ID of the remove operation
-    QueryResponse:
-      type: object
-      description: Response from executing a DQL statement. Contains query results, affected document IDs, and any warnings or errors that occurred.
-      required:
-      - queryType
-      - items
-      - mutatedDocumentIds
-      - warnings
-      - totalWarningsCount
-      properties:
-        error:
-          $ref: '#/components/schemas/QueryResponseError'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnyValue'
-        mutatedDocumentIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnyValue'
-        queryType:
-          type: string
-          description: Indicates the type of query that was executed
-        totalWarningsCount:
-          type: integer
-          format: int64
-          description: Total number of warnings generated during query execution
-        transactionId:
-          type: integer
-          format: int64
-        warnings:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryResponseWarning'
+      - set
+      - setAttachment
+      - increment
+      - replaceWithCounter
     FindResponse:
       type: object
       required:
@@ -770,58 +824,17 @@ components:
               title: The Great Gatsby
               published: 1925
         txnId: 9000
-    Document:
+    WriteResponse:
       type: object
-      description: Represents a document in the Ditto store. Documents are schema-free and can contain nested fields of various CRDT types for conflict-free replication.
+      description: Response containing results of executing a write transaction
       required:
-      - id
-      - fields
+      - results
       properties:
-        fields:
-          $ref: '#/components/schemas/AnyValue'
-          description: The document's content, which can include any valid JSON data types and special Ditto CRDT types
-        id:
-          $ref: '#/components/schemas/AnyValue'
-          description: The unique identifier for this document within its collection
-    WriteCommandResult:
-      oneOf:
-      - allOf:
-        - $ref: '#/components/schemas/UpdateResult'
-        - type: object
-          required:
-          - method
-          properties:
-            method:
-              type: string
-              enum:
-              - update
-      - allOf:
-        - $ref: '#/components/schemas/UpsertResult'
-        - type: object
-          required:
-          - method
-          properties:
-            method:
-              type: string
-              enum:
-              - upsert
-      - allOf:
-        - $ref: '#/components/schemas/RemoveResult'
-        - type: object
-          required:
-          - method
-          properties:
-            method:
-              type: string
-              enum:
-              - remove
-      description: Result of executing a write command. Contains the specific result type based on the command method.
-      discriminator:
-        propertyName: method
-        mapping:
-          remove: '#/components/schemas/RemoveResult'
-          update: '#/components/schemas/UpdateResult'
-          upsert: '#/components/schemas/UpsertResult'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WriteCommandResult'
+          description: Array of results for each write command executed in the transaction
     WriteRequest:
       type: object
       description: Request to execute one or more write commands in a transaction
@@ -844,69 +857,56 @@ components:
             favoriteBook:
               published: 1925
               title: The Great Gatsby
-    UpsertResult:
+    Upsert:
       type: object
-      description: Result of executing an upsert operation
+      description: Command to insert a new document or update an existing one if it already exists
       required:
-      - transactionId
+      - collection
+      - value
       properties:
-        transactionId:
-          type: integer
-          format: int64
-          description: Transaction ID of the upsert operation
-    WriteResponse:
+        collection:
+          type: string
+          description: Name of the collection to upsert the document into
+        id:
+          $ref: '#/components/schemas/AnyValue'
+          description: Optional ID for the document. If not provided, one will be generated
+        value:
+          $ref: '#/components/schemas/AnyValue'
+          description: Document data to insert or update
+        valueTypeOverrides:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TypeOverride'
+          description: Optional type overrides for specific fields in the document
+    FindByIdRequest:
       type: object
-      description: Response containing results of executing a write transaction
+      description: Request parameters for retrieving a specific document by its ID. This is the most efficient way to fetch a single document when you know its identifier.
       required:
-      - results
+      - collection
+      - id
       properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/WriteCommandResult'
-          description: Array of results for each write command executed in the transaction
-    SerializedAs:
-      type: string
-      description: Controls how document values are serialized in responses
-      default: latestValues
-      enum:
-      - latestValues
-      - latestValuesAndTypes
+        collection:
+          type: string
+          description: The name of the collection containing the document
+        formatAttachment:
+          type: boolean
+          default: false
+          description: When true, any attachment fields will be formatted for easier consumption
+        id:
+          $ref: '#/components/schemas/AnyValue'
+          description: The unique identifier of the document to retrieve
+        serializedAs:
+          $ref: '#/components/schemas/SerializedAs'
+          description: Controls how the document data is serialized in the response
+      example:
+        collection: people
+        id: abc123
     QueryResponseError:
       type: object
       description: An error occurred that prevented the query from executing or completing successfully
       properties:
         description:
           type: string
-    CountResponse:
-      type: object
-      description: Response from a count operation, providing both the count and transaction ID for consistency tracking.
-      required:
-      - count
-      - txnId
-      properties:
-        count:
-          type: integer
-          format: int64
-          description: The total number of documents that matched the query criteria
-        txnId:
-          type: integer
-          format: int64
-          description: The transaction ID at which this count was performed, useful for consistency checks
-      example:
-        count: 100
-        txnId: 9000
-    RpcError:
-      type: object
-      description: Error response returned when an API request fails
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: Human-readable description of what went wrong
-      example:
-        message: Some kind of human readable description of the error
   securitySchemes:
     api_key_or_jwt_token:
       type: http

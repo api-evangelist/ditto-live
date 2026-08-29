@@ -1,31 +1,48 @@
 {
   "provider": "ditto-live",
   "sources": [
-    "ditto-live-api-keys-api-openapi.yml",
-    "ditto-live-apps-api-openapi.yml",
-    "ditto-live-bigpeerreplication-api-openapi.yml",
-    "ditto-live-data-bridge-api-openapi.yml",
-    "ditto-live-store-api-openapi.yml",
-    "ditto-live-sync-api-openapi.yml"
+    "_original/ditto-live-cloud-http-api-openapi.yml",
+    "_original/ditto-live-operator-api-openapi.yml"
   ],
   "outputs": [
+    "ditto-live-store-api-openapi.yml",
+    "ditto-live-sync-api-openapi.yml",
     "ditto-live-api-keys-api-openapi.yml",
     "ditto-live-apps-api-openapi.yml",
     "ditto-live-bigpeerreplication-api-openapi.yml",
-    "ditto-live-data-bridge-api-openapi.yml",
-    "ditto-live-store-api-openapi.yml",
-    "ditto-live-sync-api-openapi.yml"
+    "ditto-live-data-bridge-api-openapi.yml"
   ],
   "archived": [],
   "errors": [
-    "ditto-live-api-keys-api-openapi.yml: dangling $ref: #/components/schemas/PermissionRules",
-    "ditto-live-apps-api-openapi.yml: dangling $ref: #/components/schemas/Permission",
-    "ditto-live-apps-api-openapi.yml: dangling $ref: #/components/schemas/ProviderConfig",
-    "ditto-live-data-bridge-api-openapi.yml: dangling $ref: #/components/schemas/DataBridgeObject",
-    "ditto-live-data-bridge-api-openapi.yml: dangling $ref: #/components/schemas/DataBridgeRequest",
-    "ditto-live-data-bridge-api-openapi.yml: dangling $ref: #/components/schemas/ListResponse_DataBridgeObject"
+    "ditto-live-operator-api-openapi.yml: dangling $ref: #/components/schemas/DataBridgeObject",
+    "ditto-live-operator-api-openapi.yml: dangling $ref: #/components/schemas/DataBridgeRequest",
+    "ditto-live-operator-api-openapi.yml: dangling $ref: #/components/schemas/ListResponse_DataBridgeObject",
+    "ditto-live-operator-api-openapi.yml: dangling $ref: #/components/schemas/Permission",
+    "ditto-live-operator-api-openapi.yml: dangling $ref: #/components/schemas/PermissionRules",
+    "ditto-live-operator-api-openapi.yml: dangling $ref: #/components/schemas/ProviderConfig"
   ],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ditto-live-cloud-http-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ditto-live-cloud-http-api-openapi.yml: tagged paths POST /store/count -> Store",
+    "ditto-live-cloud-http-api-openapi.yml: tagged paths POST /store/execute -> Store",
+    "ditto-live-cloud-http-api-openapi.yml: tagged paths POST /store/find -> Store",
+    "ditto-live-cloud-http-api-openapi.yml: tagged paths POST /store/findbyid -> Store",
+    "ditto-live-cloud-http-api-openapi.yml: tagged paths POST /store/write -> Store",
+    "ditto-live-cloud-http-api-openapi.yml: tagged paths POST /sync/remote_execute -> Sync",
+    "ditto-live-cloud-http-api-openapi.yml: declared missing tag: Store",
+    "ditto-live-cloud-http-api-openapi.yml: declared missing tag: Sync",
+    "ditto-live-operator-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "ditto-live-operator-api-openapi.yml: declared missing tag: Apps",
+    "ditto-live-operator-api-openapi.yml: declared missing tag: BigPeerReplication"
+  ],
+  "skipped": [
+    "ditto-live-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ditto-live-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ditto-live-bigpeerreplication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ditto-live-data-bridge-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ditto-live-store-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ditto-live-sync-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

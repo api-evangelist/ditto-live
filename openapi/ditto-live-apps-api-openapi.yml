@@ -1,17 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Ditto HTTP RPC API Keys Apps API
-  version: 4.0.0
-  description: The Ditto HTTP RPC API provides a RESTful interface for interacting with Ditto's distributed data store. It enables you to query, insert, update and delete data across your Ditto network while maintaining strong consistency guarantees.
+  title: Operator Management Apps API
+  description: A RESTful API that allows users to manage Big Peer apps and API keys.
+  license:
+    name: Ditto Binary License
+    identifier: Ditto Binary License
+  version: 1.0.0
 servers:
-- url: '{base_url}/api/v4'
-  description: The Ditto Big Peer acts as a central synchronization point and data store in your Ditto network. It coordinates data replication between peers and provides a consistent view of your data.
+- url: http://localhost:{port}
+  description: Local server
   variables:
-    base_url:
-      default: https://YOUR_CLOUD_URL_ENDPOINT
-      description: Your Cloud URL Endpoint from the Ditto Portal (Connect via HTTP), prefixed with https:// to form the base URL.
-security:
-- api_key_or_jwt_token: []
+    port:
+      default: '8080'
 tags:
 - name: Apps
 paths:
@@ -421,29 +421,18 @@ paths:
                   summary: app auth provider not found
 components:
   schemas:
-    App:
+    ListResponse_App:
       type: object
       required:
-      - name
+      - meta
+      - data
       properties:
-        appId:
-          type: string
-          title: AppId
-          format: uuid
-          description: UUID used to identify a BigPeerApp resource
-        authProviders:
-          type: object
-          title: AuthProviders
-          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
-          additionalProperties:
-            $ref: '#/components/schemas/ProviderConfig'
-        name:
-          type: string
-          title: Dns1123Label
-          description: "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123"
-          maxLength: 63
-          minLength: 1
-          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        meta:
+          $ref: '#/components/schemas/ListResponseMeta'
     BigPeerReplication:
       type: object
       required:
@@ -510,18 +499,32 @@ components:
           description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
           additionalProperties:
             $ref: '#/components/schemas/ProviderConfig'
-    ListResponse_App:
+    UpdateBigPeerReplicationRequest:
       type: object
-      required:
-      - meta
-      - data
       properties:
-        data:
-          type: array
+        connections:
+          type:
+          - array
+          - 'null'
           items:
-            $ref: '#/components/schemas/App'
-        meta:
-          $ref: '#/components/schemas/ListResponseMeta'
+            type: string
+            format: uri
+          example:
+          - big-peer-2.ditto.svc.cluster.local:4040
+          uniqueItems: true
+        queriesByCollection:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          propertyNames:
+            type: string
+          example:
+            cars:
+            - 'true'
     AddProviderRequest:
       type: object
       required:
@@ -583,38 +586,26 @@ components:
         totalPages:
           type: integer
           minimum: 0
-    UpdateBigPeerReplicationRequest:
+    App:
       type: object
+      required:
+      - name
       properties:
-        connections:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: uri
-          example:
-          - big-peer-2.ditto.svc.cluster.local:4040
-          uniqueItems: true
-        queriesByCollection:
-          type:
-          - object
-          - 'null'
+        appId:
+          type: string
+          title: AppId
+          format: uuid
+          description: UUID used to identify a BigPeerApp resource
+        authProviders:
+          type: object
+          title: AuthProviders
+          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
           additionalProperties:
-            type: array
-            items:
-              type: string
-          propertyNames:
-            type: string
-          example:
-            cars:
-            - 'true'
-  securitySchemes:
-    api_key_or_jwt_token:
-      type: http
-      scheme: bearer
-      bearerFormat: API Key or JWT
-      description: Authentication using either an API key or JWT token in the Authorization header
-externalDocs:
-  url: https://docs.ditto.live/http/installation/
-  description: For more detailed instructions on how to use this API and the Ditto SDK, please see the documentation.
+            $ref: '#/components/schemas/ProviderConfig'
+        name:
+          type: string
+          title: Dns1123Label
+          description: "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123"
+          maxLength: 63
+          minLength: 1
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
