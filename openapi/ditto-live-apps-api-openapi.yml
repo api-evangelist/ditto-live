@@ -433,6 +433,82 @@ components:
             $ref: '#/components/schemas/App'
         meta:
           $ref: '#/components/schemas/ListResponseMeta'
+    UpdateBigPeerReplicationRequest:
+      type: object
+      properties:
+        connections:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uri
+          example:
+          - big-peer-2.ditto.svc.cluster.local:4040
+          uniqueItems: true
+        queriesByCollection:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          propertyNames:
+            type: string
+          example:
+            cars:
+            - 'true'
+    ListResponseMeta:
+      type: object
+      required:
+      - page
+      - size
+      - totalPages
+      properties:
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
+    UpdateAppRequest:
+      type: object
+      required:
+      - authProviders
+      properties:
+        authProviders:
+          type: object
+          title: AuthProviders
+          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
+          additionalProperties:
+            $ref: '#/components/schemas/ProviderConfig'
+    App:
+      type: object
+      required:
+      - name
+      properties:
+        appId:
+          type: string
+          title: AppId
+          format: uuid
+          description: UUID used to identify a BigPeerApp resource
+        authProviders:
+          type: object
+          title: AuthProviders
+          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
+          additionalProperties:
+            $ref: '#/components/schemas/ProviderConfig'
+        name:
+          type: string
+          title: Dns1123Label
+          description: "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123"
+          maxLength: 63
+          minLength: 1
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
     BigPeerReplication:
       type: object
       required:
@@ -488,43 +564,6 @@ components:
           example:
             cars:
             - 'true'
-    UpdateAppRequest:
-      type: object
-      required:
-      - authProviders
-      properties:
-        authProviders:
-          type: object
-          title: AuthProviders
-          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
-          additionalProperties:
-            $ref: '#/components/schemas/ProviderConfig'
-    UpdateBigPeerReplicationRequest:
-      type: object
-      properties:
-        connections:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: uri
-          example:
-          - big-peer-2.ditto.svc.cluster.local:4040
-          uniqueItems: true
-        queriesByCollection:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          propertyNames:
-            type: string
-          example:
-            cars:
-            - 'true'
     AddProviderRequest:
       type: object
       required:
@@ -570,42 +609,3 @@ components:
           description: This describes the document stored in the __auth_config with the _id of auth_config. It describes the auth providers configured for a BigPeer App.
         name:
           type: string
-    ListResponseMeta:
-      type: object
-      required:
-      - page
-      - size
-      - totalPages
-      properties:
-        page:
-          type: integer
-          minimum: 0
-        size:
-          type: integer
-          minimum: 0
-        totalPages:
-          type: integer
-          minimum: 0
-    App:
-      type: object
-      required:
-      - name
-      properties:
-        appId:
-          type: string
-          title: AppId
-          format: uuid
-          description: UUID used to identify a BigPeerApp resource
-        authProviders:
-          type: object
-          title: AuthProviders
-          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
-          additionalProperties:
-            $ref: '#/components/schemas/ProviderConfig'
-        name:
-          type: string
-          title: Dns1123Label
-          description: "RFC 1123 DNS labels used for most Kubernetes resource names.  Some resource types require their names to follow the DNS label standard as defined in [RFC 1123][rfc1123].\n             This means the name must:\n                * contain at most 63 characters * contain only lowercase alphanumeric characters or '-' * start with an alphanumeric character\n                * end with an alphanumeric character\n            [rfc1123]: https://tools.ietf.org/html/rfc1123"
-          maxLength: 63
-          minLength: 1
-          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$

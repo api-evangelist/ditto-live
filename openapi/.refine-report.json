@@ -35,7 +35,8 @@
     "ditto-live-cloud-http-api-openapi.yml: declared missing tag: Sync",
     "ditto-live-operator-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "ditto-live-operator-api-openapi.yml: declared missing tag: Apps",
-    "ditto-live-operator-api-openapi.yml: declared missing tag: BigPeerReplication"
+    "ditto-live-operator-api-openapi.yml: declared missing tag: BigPeerReplication",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "ditto-live-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",

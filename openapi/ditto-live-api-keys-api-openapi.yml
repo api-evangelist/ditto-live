@@ -206,6 +206,18 @@ components:
             write:
               $ref: '#/components/schemas/PermissionRules'
               description: The set of write permissions granted
+    ListResponse_ApiKey:
+      type: object
+      required:
+      - meta
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKey'
+        meta:
+          $ref: '#/components/schemas/ListResponseMeta'
     ListResponseMeta:
       type: object
       required:
@@ -222,15 +234,3 @@ components:
         totalPages:
           type: integer
           minimum: 0
-    ListResponse_ApiKey:
-      type: object
-      required:
-      - meta
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiKey'
-        meta:
-          $ref: '#/components/schemas/ListResponseMeta'
