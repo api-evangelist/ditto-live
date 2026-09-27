@@ -157,6 +157,22 @@ paths:
                   summary: api key key not found
 components:
   schemas:
+    ListResponseMeta:
+      type: object
+      required:
+      - page
+      - size
+      - totalPages
+      properties:
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
     ApiKey:
       type: object
       required:
@@ -218,19 +234,3 @@ components:
             $ref: '#/components/schemas/ApiKey'
         meta:
           $ref: '#/components/schemas/ListResponseMeta'
-    ListResponseMeta:
-      type: object
-      required:
-      - page
-      - size
-      - totalPages
-      properties:
-        page:
-          type: integer
-          minimum: 0
-        size:
-          type: integer
-          minimum: 0
-        totalPages:
-          type: integer
-          minimum: 0
