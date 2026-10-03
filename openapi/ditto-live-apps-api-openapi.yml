@@ -425,32 +425,6 @@ paths:
                   summary: app auth provider not found
 components:
   schemas:
-    UpdateBigPeerReplicationRequest:
-      type: object
-      properties:
-        connections:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: uri
-          example:
-          - big-peer-2.ditto.svc.cluster.local:4040
-          uniqueItems: true
-        queriesByCollection:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          propertyNames:
-            type: string
-          example:
-            cars:
-            - 'true'
     ListResponseMeta:
       type: object
       required:
@@ -613,3 +587,29 @@ components:
           description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
           additionalProperties:
             $ref: '#/components/schemas/ProviderConfig'
+    UpdateBigPeerReplicationRequest:
+      type: object
+      properties:
+        connections:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uri
+          example:
+          - big-peer-2.ditto.svc.cluster.local:4040
+          uniqueItems: true
+        queriesByCollection:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          propertyNames:
+            type: string
+          example:
+            cars:
+            - 'true'

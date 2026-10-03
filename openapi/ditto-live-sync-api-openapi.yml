@@ -70,6 +70,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    RpcError:
+      type: object
+      description: Error response returned when an API request fails
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable description of what went wrong
+      example:
+        message: Some kind of human readable description of the error
+    AnyValue: {}
+    RemoteExecuteError:
+      type: object
+      required:
+      - description
+      properties:
+        description:
+          type: string
     RemoteExecutePeerItem:
       type: object
       description: Represents the response data returned from executing a query on a specific peer in the network. Contains query results, timing information, and any errors or warnings that occurred.
@@ -96,39 +115,6 @@ components:
           items:
             $ref: '#/components/schemas/AnyValue'
           description: Array of warnings generated during query execution on this peer
-    RpcError:
-      type: object
-      description: Error response returned when an API request fails
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: Human-readable description of what went wrong
-      example:
-        message: Some kind of human readable description of the error
-    RemoteExecuteRequest:
-      type: object
-      description: Request object for executing a DQL query remotely on specific peers in the network. The query must include a SYNC CONTEXT clause to specify target peers.
-      required:
-      - statement
-      properties:
-        args:
-          $ref: '#/components/schemas/AnyValue'
-          description: Optional parameterized arguments to use in the query statement
-        statement:
-          type: string
-          description: A DQL statement that must include a SYNC CONTEXT clause to specify target peers. See https://docs.ditto.live/dql-guide for syntax details.
-      example:
-        statement: SYNC CONTEXT ( PEERS WHERE peerKeyString = 'pkAg' ) SELECT * FROM cars WHERE _id = '1'
-    AnyValue: {}
-    RemoteExecuteError:
-      type: object
-      required:
-      - description
-      properties:
-        description:
-          type: string
     RemoteExecuteResponse:
       type: object
       description: Response from executing a remote query across specified peers. Contains results and any errors that occurred.
@@ -143,6 +129,20 @@ components:
           items:
             $ref: '#/components/schemas/RemoteExecutePeerItem'
           description: Array of results from each peer that executed the query
+    RemoteExecuteRequest:
+      type: object
+      description: Request object for executing a DQL query remotely on specific peers in the network. The query must include a SYNC CONTEXT clause to specify target peers.
+      required:
+      - statement
+      properties:
+        args:
+          $ref: '#/components/schemas/AnyValue'
+          description: Optional parameterized arguments to use in the query statement
+        statement:
+          type: string
+          description: A DQL statement that must include a SYNC CONTEXT clause to specify target peers. See https://docs.ditto.live/dql-guide for syntax details.
+      example:
+        statement: SYNC CONTEXT ( PEERS WHERE peerKeyString = 'pkAg' ) SELECT * FROM cars WHERE _id = '1'
   securitySchemes:
     api_key_or_jwt_token:
       type: http
