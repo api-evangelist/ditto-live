@@ -425,22 +425,88 @@ paths:
                   summary: app auth provider not found
 components:
   schemas:
-    ListResponseMeta:
+    UpdateAppRequest:
       type: object
       required:
-      - page
-      - size
-      - totalPages
+      - authProviders
       properties:
-        page:
-          type: integer
-          minimum: 0
-        size:
-          type: integer
-          minimum: 0
-        totalPages:
-          type: integer
-          minimum: 0
+        authProviders:
+          type: object
+          title: AuthProviders
+          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
+          additionalProperties:
+            $ref: '#/components/schemas/ProviderConfig'
+    AddProviderRequest:
+      type: object
+      required:
+      - name
+      - config
+      properties:
+        config:
+          oneOf:
+          - type: object
+            title: TokenWebhook
+            description: Token webhook authentication provider. Validates device tokens by calling a user-provided webhook URL. The webhook receives the token and returns the authenticated user information and permissions.
+            properties:
+              type:
+                type: string
+                enum:
+                - webhookUrl
+              webhookUrl:
+                type: string
+                format: uri
+          - type: object
+            title: Anonymous
+            description: This is a configuration setting for an anonymous provider. This contains what permissions to give anonymous users, how long their sessions should last and a shared token. The purpose of the shared token is to prevent random scanners on the internet from grabbing tokens. The token isn't considered private or secure since it will be embedded in a client software.
+            required:
+            - permission
+            - sessionLength
+            - sharedToken
+            - type
+            properties:
+              permission:
+                $ref: '#/components/schemas/Permission'
+              sessionLength:
+                type: integer
+                format: u-int32
+                description: Session length in seconds. Minimum is 1 second.
+                minimum: 1
+              sharedToken:
+                type: string
+              type:
+                type: string
+                enum:
+                - anonymous
+          title: ProviderConfig
+          description: This describes the document stored in the __auth_config with the _id of auth_config. It describes the auth providers configured for a BigPeer App.
+        name:
+          type: string
+    UpdateBigPeerReplicationRequest:
+      type: object
+      properties:
+        connections:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uri
+          example:
+          - big-peer-2.ditto.svc.cluster.local:4040
+          uniqueItems: true
+        queriesByCollection:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          propertyNames:
+            type: string
+          example:
+            cars:
+            - 'true'
     BigPeerReplication:
       type: object
       required:
@@ -496,18 +562,6 @@ components:
           example:
             cars:
             - 'true'
-    ListResponse_App:
-      type: object
-      required:
-      - meta
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/App'
-        meta:
-          $ref: '#/components/schemas/ListResponseMeta'
     App:
       type: object
       required:
@@ -531,85 +585,31 @@ components:
           maxLength: 63
           minLength: 1
           pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
-    AddProviderRequest:
+    ListResponse_App:
       type: object
       required:
-      - name
-      - config
+      - meta
+      - data
       properties:
-        config:
-          oneOf:
-          - type: object
-            title: TokenWebhook
-            description: Token webhook authentication provider. Validates device tokens by calling a user-provided webhook URL. The webhook receives the token and returns the authenticated user information and permissions.
-            properties:
-              type:
-                type: string
-                enum:
-                - webhookUrl
-              webhookUrl:
-                type: string
-                format: uri
-          - type: object
-            title: Anonymous
-            description: This is a configuration setting for an anonymous provider. This contains what permissions to give anonymous users, how long their sessions should last and a shared token. The purpose of the shared token is to prevent random scanners on the internet from grabbing tokens. The token isn't considered private or secure since it will be embedded in a client software.
-            required:
-            - permission
-            - sessionLength
-            - sharedToken
-            - type
-            properties:
-              permission:
-                $ref: '#/components/schemas/Permission'
-              sessionLength:
-                type: integer
-                format: u-int32
-                description: Session length in seconds. Minimum is 1 second.
-                minimum: 1
-              sharedToken:
-                type: string
-              type:
-                type: string
-                enum:
-                - anonymous
-          title: ProviderConfig
-          description: This describes the document stored in the __auth_config with the _id of auth_config. It describes the auth providers configured for a BigPeer App.
-        name:
-          type: string
-    UpdateAppRequest:
-      type: object
-      required:
-      - authProviders
-      properties:
-        authProviders:
-          type: object
-          title: AuthProviders
-          description: Auth providers associated with a BigPeer App, to be used when authenticating devices against BigPeer Subscription.
-          additionalProperties:
-            $ref: '#/components/schemas/ProviderConfig'
-    UpdateBigPeerReplicationRequest:
-      type: object
-      properties:
-        connections:
-          type:
-          - array
-          - 'null'
+        data:
+          type: array
           items:
-            type: string
-            format: uri
-          example:
-          - big-peer-2.ditto.svc.cluster.local:4040
-          uniqueItems: true
-        queriesByCollection:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          propertyNames:
-            type: string
-          example:
-            cars:
-            - 'true'
+            $ref: '#/components/schemas/App'
+        meta:
+          $ref: '#/components/schemas/ListResponseMeta'
+    ListResponseMeta:
+      type: object
+      required:
+      - page
+      - size
+      - totalPages
+      properties:
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0

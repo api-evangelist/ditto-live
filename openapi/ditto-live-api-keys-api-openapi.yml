@@ -157,22 +157,18 @@ paths:
                   summary: api key key not found
 components:
   schemas:
-    ListResponseMeta:
+    ListResponse_ApiKey:
       type: object
       required:
-      - page
-      - size
-      - totalPages
+      - meta
+      - data
       properties:
-        page:
-          type: integer
-          minimum: 0
-        size:
-          type: integer
-          minimum: 0
-        totalPages:
-          type: integer
-          minimum: 0
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKey'
+        meta:
+          $ref: '#/components/schemas/ListResponseMeta'
     ApiKey:
       type: object
       required:
@@ -222,15 +218,19 @@ components:
             write:
               $ref: '#/components/schemas/PermissionRules'
               description: The set of write permissions granted
-    ListResponse_ApiKey:
+    ListResponseMeta:
       type: object
       required:
-      - meta
-      - data
+      - page
+      - size
+      - totalPages
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiKey'
-        meta:
-          $ref: '#/components/schemas/ListResponseMeta'
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
