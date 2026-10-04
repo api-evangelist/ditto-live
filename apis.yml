@@ -162,6 +162,9 @@ apis:
   - type: Documentation
     url: https://docs.ditto.live/edge-server/configuration/reference/http-server-resource
 common:
+  - type: CapabilityMap
+    url: capabilities/ditto-live-capability-edges.yml
+    name: Ditto Business Capability Map
   - type: AgenticAccess
     url: agentic-access/ditto-live-agentic-access.yml
   - type: TrustCenter
