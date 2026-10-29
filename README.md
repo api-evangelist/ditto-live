@@ -1,4 +1,4 @@
-# Ditto (ditto-live)
+# Ditto
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,53 +64,182 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Ditto is a peer-to-peer data sync platform for mobile and edge devices that enables real-time synchronization over Bluetooth, WiFi Direct, and LAN without requiring a central server. It ships an embeddable SDK for 12 languages and runtimes (Swift, Kotlin, Flutter, React Native, JavaScript, .NET/C#, C++, Rust, Go, Java) alongside an optional cloud tier (Big Peer) and an Edge Server for on-premise or gateway deployments. APIs.json: [https://raw.githubusercontent.com/api-evangelist/ditto-live/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/ditto-live/refs/heads/main/apis.yml)
+Ditto is a peer-to-peer data sync platform for mobile and edge devices that enables real-time synchronization without requiring a central server, using Bluetooth, WiFi Direct, and LAN transports. The platform ships an embeddable SDK for iOS, Android, Flutter, React Native, JavaScript, .NET/C#, C++, Rust, Go, Java, and Kotlin, and backs it with an optional cloud tier (the "Big Peer") that bridges device meshes to the internet. Developers query and mutate data through DQL (Ditto Query Language) on-device, or via a cloud HTTP API (v5) against per-app endpoints. Ditto targets mission-critical mobile and edge workloads — retail, manufacturing, aviation, healthcare — where connectivity is intermittent or absent.
 
-[![Naftiko Run](https://img.shields.io/badge/Naftiko-Run-blue)](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=ditto-live-api-evangelist&utm_content=repo)
+**Areas:** Developer Tools · Database · Synchronization · Peer-to-Peer · Edge Computing · Offline-First · Mobile
 
-## Tags
+## Ditto on APIs.io
 
-- Developer Tools
-- Database
-- Synchronization
-- Peer-to-Peer
-- Edge Computing
-- Offline-First
-- Mobile
+Everything profiled for Ditto is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ditto-live/](https://apis.io/providers/ditto-live/)** — or go straight to one of the APIs or properties below.
 
-## APIs
+### APIs (7)
 
-- **Ditto SDK** — Multi-platform embeddable SDK for peer-to-peer and cloud-synced data storage ([docs](https://docs.ditto.live/sdk/latest/home))
-- **Ditto Cloud HTTP API** — REST HTTP API (v4/v5) for querying and mutating data in the Big Peer cloud platform ([docs](https://docs.ditto.live/cloud/http-api/getting-started))
-- **Ditto Edge Server HTTP API** — Local HTTP API on Edge Server nodes for DQL execution, health, presence, and log retrieval ([docs](https://docs.ditto.live/edge-server/configuration/reference/http-server-resource))
+- [Ditto SDK](https://apis.io/apis/ditto-live/sdk/) — Multi-platform embeddable SDK for peer-to-peer and cloud-synced data storage. Supports Swift, Kotlin, Flutter, React Native, JavaScript, .NET/C#, C++, Rust,…
+- [Ditto API Keys API](https://apis.io/apis/ditto-live/ditto-live-api-keys-api/) — Big Peer HTTP API keys
+- [Ditto Apps API](https://apis.io/apis/ditto-live/ditto-live-apps-api/) — The Apps API from Ditto — 6 operation(s) for apps.
+- [Ditto BigPeerReplication API](https://apis.io/apis/ditto-live/ditto-live-bigpeerreplication-api/) — The BigPeerReplication API from Ditto — 2 operation(s) for bigpeerreplication.
+- [Ditto Data Bridge API](https://apis.io/apis/ditto-live/ditto-live-data-bridge-api/) — Apps' data bridges (CDC)
+- [Ditto Store API](https://apis.io/apis/ditto-live/ditto-live-store-api/) — The Store API from Ditto — 5 operation(s) for store.
+- [Ditto Sync API](https://apis.io/apis/ditto-live/ditto-live-sync-api/) — The Sync API from Ditto — 1 operation(s) for sync.
 
-## Plans / Rate Limits / FinOps
+### Published properties
 
-| Resource | Link |
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [ditto-live](https://apis.io/servers/ditto-live/ditto-live/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Ditto Live Agentic Access](https://apis.io/agentic-access/ditto-live/ditto-live-agentic-access/)
+
+#### JSON Schema (11)
+
+The data models the API reads and writes.
+
+- [ApiKey](https://apis.io/schemas/ditto-live/ditto-live-apikey/)
+- [App](https://apis.io/schemas/ditto-live/ditto-live-app/)
+- [BigPeerReplication](https://apis.io/schemas/ditto-live/ditto-live-bigpeer-replication/)
+- [DataBridge](https://apis.io/schemas/ditto-live/ditto-live-databridge/)
+- [Document](https://apis.io/schemas/ditto-live/ditto-live-document/)
+- [FindRequest](https://apis.io/schemas/ditto-live/ditto-live-findrequest/)
+- [FindResponse](https://apis.io/schemas/ditto-live/ditto-live-findresponse/)
+- [QueryRequest](https://apis.io/schemas/ditto-live/ditto-live-queryrequest/)
+- [QueryResponse](https://apis.io/schemas/ditto-live/ditto-live-queryresponse/)
+- [WriteRequest](https://apis.io/schemas/ditto-live/ditto-live-writerequest/)
+- [WriteResponse](https://apis.io/schemas/ditto-live/ditto-live-writeresponse/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Ditto Live Context](https://apis.io/jsonld/ditto-live/ditto-live-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Ditto Platform Vocabulary](https://apis.io/vocabularies/ditto-live/ditto-live-vocabulary/)
+
+#### Examples (6)
+
+Example requests and responses.
+
+- [Ditto Live Store Execute Request Example](https://apis.io/examples/ditto-live/ditto-live-store-execute-request-example/)
+- [Ditto Live Store Execute Response Example](https://apis.io/examples/ditto-live/ditto-live-store-execute-response-example/)
+- [Ditto Live Store Find Request Example](https://apis.io/examples/ditto-live/ditto-live-store-find-request-example/)
+- [Ditto Live Store Find Response Example](https://apis.io/examples/ditto-live/ditto-live-store-find-response-example/)
+- [Ditto Live Store Write Request Example](https://apis.io/examples/ditto-live/ditto-live-store-write-request-example/)
+- [Ditto Live Store Write Response Example](https://apis.io/examples/ditto-live/ditto-live-store-write-response-example/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Ditto HTTP RPC API Keys API](https://apis.io/collections/ditto-live/open-ditto-live-api-keys-api/)
+- [Ditto HTTP RPC API Keys Apps API](https://apis.io/collections/ditto-live/open-ditto-live-apps-api/)
+- [Ditto HTTP RPC API Keys BigPeerReplication API](https://apis.io/collections/ditto-live/open-ditto-live-bigpeerreplication-api/)
+- [Ditto HTTP RPC API Keys Data Bridge API](https://apis.io/collections/ditto-live/open-ditto-live-data-bridge-api/)
+- [Ditto HTTP RPC API Keys Store API](https://apis.io/collections/ditto-live/open-ditto-live-store-api/)
+- [Ditto HTTP RPC API Keys Sync API](https://apis.io/collections/ditto-live/open-ditto-live-sync-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Ditto — jsonschema rules](https://apis.io/rules/ditto-live/ditto-live-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ditto Live Authentication](https://apis.io/security/ditto-live/ditto-live-authentication/)
+- [Ditto Live Domain Security](https://apis.io/security/ditto-live/ditto-live-domain-security/)
+- [Ditto Live Trust Center](https://apis.io/security/ditto-live/ditto-live-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ditto Live Plans Pricing](https://apis.io/plans/ditto-live/ditto-live-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ditto Live Rate Limits](https://apis.io/rate-limits/ditto-live/ditto-live-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Ditto Live Finops](https://apis.io/finops/ditto-live/ditto-live-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.ditto.com)
+- [Documentation](https://docs.ditto.live)
+- [Pricing](https://www.ditto.com/pricing/cloud-sync)
+- [Changelog](https://docs.ditto.live/changelog)
+- [Blog](https://www.ditto.com/blog)
+- [GitHub](https://github.com/getditto)
+
+## API Evangelist rating
+
+**Kin Score 36.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| Plans & Pricing | [plans/ditto-live-plans-pricing.yml](plans/ditto-live-plans-pricing.yml) |
-| Rate Limits | [rate-limits/ditto-live-rate-limits.yml](rate-limits/ditto-live-rate-limits.yml) |
-| FinOps | [finops/ditto-live-finops.yml](finops/ditto-live-finops.yml) |
+| Discoverability | 60.0 |
+| Contract quality | 51.7 |
+| Contract governance | 9.8 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 26.3 |
 
-## Timestamps
+**Agent readiness 30.8** — agent-ready
 
-- **Created:** 2026-06-12
-- **Modified:** 2026-06-12
-
-## Common Properties
-
-| Type | URL |
+| Agent-readiness dimension | Result |
 |---|---|
-| Website | https://www.ditto.com |
-| Documentation | https://docs.ditto.live |
-| GitHub Organization | https://github.com/getditto |
-| LinkedIn | https://www.linkedin.com/company/dittolive |
-| X / Twitter | https://twitter.com/dittolive |
-| Blog | https://www.ditto.com/blog |
-| Pricing | https://www.ditto.com/pricing/cloud-sync |
-| Changelog | https://docs.ditto.live/changelog |
-| Portal | https://portal.ditto.live |
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-## Maintainers
+**Regulatory alignment 21.6** — Horizontal (data, software, accessibility, platform)
 
-- Kin Lane — kin@apievangelist.com
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ditto-live/](https://apis.io/providers/ditto-live/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Ditto: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ditto-live/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
